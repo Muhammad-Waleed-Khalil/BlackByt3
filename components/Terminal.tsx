@@ -4,9 +4,11 @@ import { Terminal as TerminalIcon, X, Minimize2, Maximize2 } from 'lucide-react'
 
 interface TerminalProps {
   onNavigate: (section: SectionId) => void;
+  onToggleRedpill: () => void;
+  playSfx: (type: 'type' | 'error' | 'success') => void;
 }
 
-const Terminal: React.FC<TerminalProps> = ({ onNavigate }) => {
+const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSfx }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [isMinimized, setIsMinimized] = useState(false);
   const [input, setInput] = useState('');
@@ -28,12 +30,14 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate }) => {
 
     switch (cleanCmd) {
       case 'help':
+        playSfx('success');
         systemResponse = {
           input: '',
           output: (
             <div className="grid grid-cols-2 gap-2 text-red-400">
               <span>help</span><span>Show manifest</span>
               <span>clear</span><span>Clear screen</span>
+              <span>redpill</span><span>???</span>
               <span>home</span><span>/root</span>
               <span>about</span><span>/about</span>
               <span>services</span><span>/services</span>
@@ -54,16 +58,25 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate }) => {
         setHistory([]);
         return;
       case 'whoami':
+        playSfx('success');
         systemResponse = { input: '', output: 'root@blackbyt3:~# [GUEST_ACCESS_LEVEL_4]', type: 'success' };
+        break;
+      case 'redpill':
+        playSfx('error');
+        onToggleRedpill();
+        systemResponse = { input: '', output: 'REALITY DISTORTION ACTIVATED. WELCOME TO THE DESERT OF THE REAL.', type: 'error' };
         break;
       case 'konami code':
       case 'up up down down left right left right b a':
+        playSfx('error');
         systemResponse = { input: '', output: 'NUCLEAR LAUNCH DETECTED... JUST KIDDING. WELCOME HACKER.', type: 'error' };
         break;
       case 'sudo':
+        playSfx('error');
         systemResponse = { input: '', output: 'User is not in the sudoers file. This incident will be reported.', type: 'error' };
         break;
       case 'scan':
+        playSfx('success');
         systemResponse = { input: '', output: 'INITIATING DEEP SCAN... VULNERABILITIES FOUND: 0. SYSTEM SECURE.', type: 'error' };
         break;
       case 'home':
@@ -74,12 +87,16 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate }) => {
       case 'arena':
       case 'projects':
       case 'resources':
+      case 'shop':
+      case 'faq':
       case 'contact':
+        playSfx('success');
         onNavigate(cleanCmd as SectionId);
         systemResponse = { input: '', output: `Navigating to section: [${cleanCmd.toUpperCase()}]...`, type: 'success' };
         break;
       default:
         if (cleanCmd !== '') {
+          playSfx('error');
           systemResponse = { input: '', output: `Command not found: ${cleanCmd}`, type: 'error' };
         }
     }
@@ -93,6 +110,11 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate }) => {
       handleCommand(input);
     }
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+    playSfx('type');
+  }
 
   if (!isOpen) {
     return (
@@ -145,7 +167,7 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate }) => {
               id="terminal-input"
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={handleChange}
               onKeyDown={handleKeyDown}
               className="bg-transparent border-none outline-none text-red-500 w-full placeholder-red-900/50"
               autoFocus

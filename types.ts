@@ -30,9 +30,9 @@ export interface ServiceItem {
   title: string;
   description?: string;
   details?: string[];
-  fullDetails?: ServiceDetail; // For Pen Testing & Red Teaming
+  fullDetails?: ServiceDetail;
   icon: string;
-  category?: string; // To group them
+  category?: string;
 }
 
 export interface NavItem {
@@ -42,7 +42,11 @@ export interface NavItem {
 
 export interface TeamMember {
   name: string;
-  role?: string;
+  role: string;
+  description: string;
+  image?: string;
+  clearance: string;
+  specialty: string;
 }
 
 export interface BlogPost {
@@ -71,4 +75,12 @@ export interface ShopItem {
 export interface FaqItem {
   question: string;
   answer: string;
+}
+
+export type ModalType = 'LOGIN' | 'LEGAL_PRIVACY' | 'LEGAL_TERMS' | null;
+
+export interface AppState {
+  isRedpill: boolean;
+  audioEnabled: boolean;
+  activeModal: ModalType;
 }

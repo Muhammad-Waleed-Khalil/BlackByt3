@@ -51,22 +51,21 @@ export const ABOUT_CONTENT = {
 };
 
 export const TEAM_LIST: TeamMember[] = [
-  { name: "Muhammad Waqar" },
-  { name: "Muhammad Jawad" },
-  { name: "Shamir Khan" },
-  { name: "Ammar Hanif" },
-  { name: "Saad Khan" },
-  { name: "Jafar Ali" },
-  { name: "Zeeshan Ali" },
-  { name: "Maham" },
-  { name: "Aqsa" },
-  { name: "Sanan Ali Shah" },
-  { name: "Hisbullah" },
-  { name: "Waleed" }
+  { name: "Muhammad Waqar", role: "Founder / Lead Architect", description: "The architect of the Cyber Space. Orchestrating offensive operations and strategic defense.", clearance: "L5_ADMIN", specialty: "ARCHITECT" },
+  { name: "Muhammad Jawad", role: "Head of Operations", description: "Ensuring swift execution of all tactical engagements. Master of logistics.", clearance: "L4_COMMAND", specialty: "OPS_LEAD" },
+  { name: "Shamir Khan", role: "Lead Penetration Tester", description: "Breaching secure perimeters before breakfast. Network infrastructure exploitation.", clearance: "L4_OFFENSIVE", specialty: "BREACHER" },
+  { name: "Ammar Hanif", role: "Red Team Lead", description: "Adversary emulation specialist. Simulates APT threats to test organizational resilience.", clearance: "L4_OFFENSIVE", specialty: "RED_TEAM" },
+  { name: "Saad Khan", role: "AI Security Researcher", description: "Developing autonomous defense models and adversarial ML attacks.", clearance: "L3_R&D", specialty: "AI_SEC" },
+  { name: "Jafar Ali", role: "Hardware Security Lead", description: "Black Labs Director. If it has a circuit board, he can hack it.", clearance: "L4_HARDWARE", specialty: "HARDWARE" },
+  { name: "Zeeshan Ali", role: "Cloud Security Architect", description: "Securing the ethereal. Specialist in AWS/Azure hardening and container escapes.", clearance: "L3_CLOUD", specialty: "CLOUD_SEC" },
+  { name: "Maham", role: "GRC Specialist", description: "Navigating the labyrinth of compliance. Ensuring security meets policy.", clearance: "L3_COMPLIANCE", specialty: "POLICY" },
+  { name: "Aqsa", role: "Threat Intel Analyst", description: "Monitoring the dark web wires. Tracking threat actors and TTPs.", clearance: "L3_INTEL", specialty: "INTEL" },
+  { name: "Sanan Ali Shah", role: "Security Engineer", description: "Builder of secure pipelines. Automating defense mechanisms.", clearance: "L2_ENGINEER", specialty: "DEVSECOPS" },
+  { name: "Hisbullah", role: "Junior Pentester", description: "The rising shadow. Specializing in web application vulnerabilities.", clearance: "L2_OPERATOR", specialty: "WEB_SEC" },
+  { name: "Waleed", role: "Wildcard", description: "Jo kay tum khud hoo. The unexpected variable in every equation.", clearance: "L?_UNKNOWN", specialty: "ANOMALY" }
 ];
 
 export const SERVICES_DATA: ServiceItem[] = [
-  // Cybersecurity Services
   {
     title: "Penetration Testing",
     category: "Cybersecurity",
@@ -107,7 +106,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     description: "SOC-as-a-Service, 24/7 monitoring, patch management, playbook creation.",
     icon: "lock"
   },
-  // AI & ML
   {
     title: "AI & ML Solutions",
     category: "AI_Solutions",
@@ -115,7 +113,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     details: ["Custom ML Models", "Automation & Orchestration", "AI-integrated Web & App Solutions"],
     icon: "brain"
   },
-  // Hardware
   {
     title: "Hardware-based Security",
     category: "Hardware",
@@ -123,7 +120,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     details: ["Wi-Fi pentesting rigs", "HID attack devices", "USB exfil tools", "RFID/NFC cloning kits", "RF analyzers", "Firmware extractors"],
     icon: "chip"
   },
-  // Education Support
   {
     title: "FYP & Project Support",
     category: "Education",
@@ -144,106 +140,79 @@ export const SOLUTIONS_INDUSTRIES = [
   "Startups & SaaS",
   "Educational Institutions",
   "IoT & Embedded Systems",
-  "Government & Critical Infrastructure"
+  "Gov & Critical Infrastructure"
 ];
 
 export const ACADEMY_CONTENT = {
   headline: "Learn by Doing — Practical Cyber & Cloud Skills",
   offerings: [
-    "Course Catalog (Bootcamps, Short Courses)",
-    "Certifications (Black Byt3 Certifications)",
-    "OCMP - One to One Session Program",
-    "Practical AWS Certified (Course Landing)",
-    "Machine Learning Certified - Full Details"
+    "Course Catalog (Bootcamps)",
+    "Black Byt3 Certifications",
+    "OCMP (1:1 Mentorship)",
+    "Practical AWS Certified",
+    "Machine Learning Certified"
   ]
 };
 
 export const ARENA_CONTENT = {
   headline: "Gather. Compete. Learn.",
-  description: "City-wide and cross-province CTFs, DEF-CON-style community gatherings, workshops, and custom corporate war games.",
-  features: ["Upcoming Events & CTFs", "Black Byt3 CTF Team", "Past Events & Highlights", "Host an Event / Sponsorships"]
+  description: "The proving grounds. We run city-wide and cross-province CTFs, DEF-CON-style gatherings, and corporate war games.",
+  features: ["Upcoming CTFs", "Black Byt3 Team", "Past Highlights", "Host an Event"]
 };
 
 export const PROJECTS_DATA: ProjectCaseStudy[] = [
   {
     id: "001",
-    title: "FINTECH_ZERO_DAY",
-    client: "Regional Banking Enterprise",
-    problem: "Suspected APT persistence in legacy payment gateway infrastructure.",
-    scope: "Internal Network, Core Banking API, Cloud AWS Environment.",
-    approach: "Hybrid Red Teaming + Automated Fuzzing. Deployed custom C2 beacons to map internal trust relationships.",
-    outcome: "Identified 2 Critical RCEs and 4 High-Risk Misconfigurations. $10M+ Potential fraud prevented.",
-    artifacts: "Executive Report, Sanitized PoC Exploit Chain, Remediation Playbook."
+    title: "FinTech Fortress Breach",
+    client: "Regional Banking App",
+    problem: "Suspected API vulnerabilities leading to potential PII leakage.",
+    scope: "Full-stack penetration test (Mobile + API)",
+    approach: "Reverse engineering APK, fuzzing API endpoints, MITM attacks.",
+    outcome: "Identified critical IDOR allowing full account takeover. Patched in 48hrs.",
+    artifacts: "Sanitized Report, PoC Video"
   },
   {
     id: "002",
-    title: "IOT_FIRMWARE_BREACH",
-    client: "Smart Home Manufacturer",
-    problem: "Unverified bootloader vulnerability reports surfacing on dark web forums.",
-    scope: "Firmware Analysis, Hardware Interface Inspection (UART/JTAG), RF Protocol Analysis.",
-    approach: "Black Labs hardware extraction. Dumped flash memory, reverse engineered binary, identified hardcoded root keys.",
-    outcome: "Patched 50,000+ deployed units via OTA update before widespread exploitation.",
-    artifacts: "Technical Advisory, Firmware Patch Diff, Hardware Hardening Guide."
+    title: "IoT Smart Grid Hardening",
+    client: "Energy Sector Provider",
+    problem: "Legacy hardware with unverified firmware security.",
+    scope: "Hardware hacking & Firmware extraction",
+    approach: "UART interfacing, SPI dump, firmware reverse engineering.",
+    outcome: "Found hardcoded root credentials. Developed custom firmware patch.",
+    artifacts: "Hardware Mod Guide, Whitepaper"
   },
   {
     id: "003",
-    title: "CLOUD_INFRA_HARDENING",
-    client: "SaaS Unicorn (Healthcare)",
-    problem: "Compliance audit failure (HIPAA) due to excessive IAM permissions.",
-    scope: "AWS/Azure Multi-cloud Environment, CI/CD Pipelines.",
-    approach: "Deployed custom AI-driven policy analyzer (Black Byt3 ML). Mapped 5,000+ roles.",
-    outcome: "Achieved 100% Compliance. Reduced attack surface by 65%. Automated future IAM audits.",
-    artifacts: "Compliance Certification Support, Automated Policy Scripts, Terraform State Analysis."
+    title: "Red Team: Project Chimera",
+    client: "SaaS Unicorn",
+    problem: "Testing SOC response to advanced ransomware simulation.",
+    scope: "Assumed breach, lateral movement goal.",
+    approach: "Phishing entry, Kerberoasting, AD escalation.",
+    outcome: "Achieved Domain Admin undetected for 3 days. SOC playbooks updated.",
+    artifacts: "Attack Path Graph, Executive Brief"
   }
-];
-
-export const PARTNERSHIPS_CONTENT = {
-  strategic: ["Rayonix", "TechBiz", "Cyber Pashto", "AQEDA"],
-  opportunities: ["Partnership Opportunities", "Reseller & Technology Partners"]
-};
-
-export const RESOURCES_CONTENT = [
-  { title: "Technical Explainers & How-tos", category: "Guide" },
-  { title: "Vulnerability Writeups", category: "Report" },
-  { title: "Hardware Tool Walkthroughs", category: "Black Labs" },
-  { title: "Career & Mentorship Posts", category: "OCMP" },
-  { title: "Event Recaps & Recordings", category: "Events" }
 ];
 
 export const SHOP_CONTENT: ShopItem[] = [
-  {
-    title: "1-on-1 Security Consultation",
-    description: "Direct line to our lead architects for architecture review or breach triage.",
-    price: "Book Now",
-    type: "booking"
-  },
-  {
-    title: "Black Byt3 Swag Pack",
-    description: "Official operator hoodies, stickers, and physical challenge coins.",
-    price: "Incoming",
-    type: "product"
-  },
-  {
-    title: "Certification Voucher",
-    description: "Pre-purchase exam attempts for Black Byt3 Practical Certifications.",
-    price: "$200",
-    type: "product"
-  }
+  { title: "Training Session Booking", description: "Reserve a slot for dedicated training or consultation.", type: "booking", price: "BOOK_NOW" },
+  { title: "Black Byt3 Swag Pack", description: "Hoodie, stickers, and physical challenge coin.", type: "product", price: "$49.99" },
+  { title: "Certification Voucher", description: "Exam voucher for Practical AWS Certified.", type: "product", price: "$199.00" }
 ];
+
+export const RESOURCES_CONTENT = [
+  { title: "Zero-Day Analysis: Log4Shell Revisited", category: "Article" },
+  { title: "Hardware Hacking 101: Bus Pirate Guide", category: "Tutorial" },
+  { title: "The State of AI in Offensive Cyber", category: "Whitepaper" }
+];
+
+export const PARTNERSHIPS_CONTENT = {
+  strategic: ["Rayonix", "TechBiz", "Cyber Pashto", "AQEDA"]
+};
 
 export const FAQ_CONTENT: FaqItem[] = [
-  {
-    question: "What is the 'Black Labs' hardware division?",
-    answer: "Black Labs is our dedicated R&D unit focused on offensive hardware. We build custom rigs for Wi-Fi pentesting, RFID cloning, and firmware extraction."
-  },
-  {
-    question: "How does the OCMP Mentorship work?",
-    answer: "It is a 1-to-1 program. You get paired with a senior security engineer who guides your career, reviews your code, and conducts mock interviews."
-  },
-  {
-    question: "Are your CTFs open to the public?",
-    answer: "Yes, The Arena hosts both public community events and private corporate war games. Check the Arena section for upcoming dates."
-  }
+  { question: "What is OCMP?", answer: "One-to-One Cyber Mentor Program. Personalized roadmap, live labs, and career guidance." },
+  { question: "Do you offer student discounts?", answer: "Yes. Verify your academic status via the contact form for special FYP rates." },
+  { question: "Is Black Labs hardware legal?", answer: "All tools are sold for educational and research purposes only. Ethics agreement required." }
 ];
 
-export const CONTACT_FIELDS = ["Name", "Company (Optional)", "Email", "Phone (Optional)", "Service Interested", "Message", "Budget"];
+export const CONTACT_FIELDS = ["Name", "Company (Optional)", "Email", "Phone (Optional)"];

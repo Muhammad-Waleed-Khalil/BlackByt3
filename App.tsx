@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Scene3D from './components/Scene3D';
 import Terminal from './components/Terminal';
 import Section from './components/Section';
 import Navigation from './components/Navigation';
 import DetailedService from './components/DetailedService';
-import { SectionId } from './types';
+import CustomCursor from './components/CustomCursor';
+import TeamGrid from './components/TeamGrid';
+import LoginModal from './components/LoginModal';
+import LegalTerminal from './components/LegalTerminal';
+import { SectionId, AppState, ModalType } from './types';
 import { 
   HERO_CONTENT, 
   WHY_CHOOSE_CARDS,
@@ -21,11 +26,65 @@ import {
   RESOURCES_CONTENT,
   CONTACT_FIELDS
 } from './constants';
-import { Globe, Shield, Target, Hexagon, ChevronRight, Lock, Users, User, ShoppingBag, HelpCircle } from 'lucide-react';
+import { Globe, Shield, Target, Hexagon, ChevronRight, Lock, Users, ShoppingBag, HelpCircle } from 'lucide-react';
+
+// Simple Audio Synth for SFX
+const AudioEngine = () => {
+  const [ctx, setCtx] = useState<AudioContext | null>(null);
+
+  useEffect(() => {
+    setCtx(new (window.AudioContext || (window as any).webkitAudioContext)());
+  }, []);
+
+  const playTone = useCallback((freq: number, type: 'sine' | 'square' | 'sawtooth', duration: number) => {
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  }, [ctx]);
+
+  return {
+    playTyping: () => playTone(800 + Math.random() * 200, 'square', 0.05),
+    playError: () => {
+      playTone(150, 'sawtooth', 0.3);
+      setTimeout(() => playTone(100, 'sawtooth', 0.3), 150);
+    },
+    playSuccess: () => {
+       playTone(1000, 'sine', 0.1);
+       setTimeout(() => playTone(2000, 'sine', 0.2), 100);
+    }
+  };
+};
 
 const App: React.FC = () => {
   const [isBooting, setIsBooting] = useState(true);
   const [bootText, setBootText] = useState<string[]>([]);
+  const [appState, setAppState] = useState<AppState>({
+    isRedpill: false,
+    audioEnabled: true,
+    activeModal: null
+  });
+  
+  const { playTyping, playError, playSuccess } = AudioEngine();
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const handlePlaySfx = (type: 'type' | 'error' | 'success') => {
+    if (type === 'type') playTyping();
+    if (type === 'error') playError();
+    if (type === 'success') playSuccess();
+  };
 
   useEffect(() => {
     const lines = [
@@ -41,8 +100,12 @@ const App: React.FC = () => {
     lines.forEach((line, index) => {
       setTimeout(() => {
         setBootText(prev => [...prev, line]);
+        playTyping();
         if (index === lines.length - 1) {
-          setTimeout(() => setIsBooting(false), 800);
+          setTimeout(() => {
+            setIsBooting(false);
+            playSuccess();
+          }, 800);
         }
       }, delay);
       delay += Math.random() * 400 + 200;
@@ -54,6 +117,14 @@ const App: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const openModal = (type: ModalType) => {
+    setAppState(prev => ({ ...prev, activeModal: type }));
+  };
+
+  const closeModal = () => {
+    setAppState(prev => ({ ...prev, activeModal: null }));
   };
 
   if (isBooting) {
@@ -72,10 +143,28 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="bg-black text-white min-h-screen overflow-x-hidden cursor-crosshair selection:bg-red-900 selection:text-white">
-      <Scene3D />
+    <div className={`bg-black text-white min-h-screen overflow-x-hidden cursor-none selection:bg-red-900 selection:text-white transition-all duration-1000 ${appState.isRedpill ? 'contrast-125 brightness-125' : ''}`}>
+      <CustomCursor />
+      <Scene3D isRedpill={appState.isRedpill} />
       <Navigation onNavigate={scrollToSection} />
       
+      {/* Global Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-red-600 z-50 origin-left"
+        style={{ scaleX }}
+      />
+      <div className="fixed top-2 right-4 z-50 text-[10px] font-mono text-red-600 bg-black px-2 border border-red-900">
+        BREACH_PROGRESS
+      </div>
+
+      {/* Modals */}
+      <LoginModal isOpen={appState.activeModal === 'LOGIN'} onClose={closeModal} />
+      <LegalTerminal 
+        isOpen={appState.activeModal === 'LEGAL_PRIVACY' || appState.activeModal === 'LEGAL_TERMS'} 
+        type={appState.activeModal === 'LEGAL_PRIVACY' ? 'PRIVACY' : 'TERMS'} 
+        onClose={closeModal} 
+      />
+
       <main className="relative z-10">
         
         {/* 01. HOME */}
@@ -102,7 +191,7 @@ const App: React.FC = () => {
                  </div>
                </div>
 
-               {/* Why Choose Cards - Glassmorphism style */}
+               {/* Why Choose Cards */}
                <div className="hidden md:grid grid-cols-1 gap-4">
                   {WHY_CHOOSE_CARDS.map((card, idx) => (
                     <div key={idx} className="bg-black/60 border border-gray-800 p-4 backdrop-blur-sm hover:border-red-600 transition-colors">
@@ -142,21 +231,13 @@ const App: React.FC = () => {
                      ))}
                    </div>
                  </div>
-                 
-                 <div>
-                    <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-4 mt-8">Classified Personnel</h4>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {TEAM_LIST.map((member, i) => (
-                        <div key={i} className="border border-gray-800 p-2 text-center hover:bg-red-900/10 transition-colors cursor-help">
-                           <div className="w-8 h-8 bg-gray-900 mx-auto mb-2 rounded-full flex items-center justify-center text-gray-600">
-                             <User className="w-4 h-4" />
-                           </div>
-                           <div className="text-xs font-mono text-gray-300">{member.name}</div>
-                        </div>
-                      ))}
-                    </div>
-                 </div>
               </div>
+            </div>
+            
+            {/* Team Grid */}
+            <div>
+               <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">Active Operators</h4>
+               <TeamGrid members={TEAM_LIST} />
             </div>
           </div>
         </Section>
@@ -199,7 +280,7 @@ const App: React.FC = () => {
               ))}
             </div>
             
-            {/* Featured Course - Practical AWS */}
+            {/* Featured Course */}
             <div className="bg-red-900/5 border border-red-900/30 p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:bg-red-950/10 transition-all">
                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                <h3 className="text-2xl font-['Unica_One'] text-white mb-2 z-10 group-hover:text-red-500 transition-colors">PRACTICAL AWS CERTIFIED</h3>
@@ -238,7 +319,7 @@ const App: React.FC = () => {
                  </div>
                </div>
                
-               {/* CTF Countdown Widget */}
+               {/* CTF Countdown */}
                <div className="w-full lg:w-80 bg-black border border-red-600/30 p-6 flex flex-col items-center justify-center text-center shadow-[0_0_20px_rgba(255,0,0,0.1)]">
                  <h4 className="text-red-600 font-['Unica_One'] text-3xl mb-2">NEXT CTF</h4>
                  <div className="text-5xl text-white font-mono font-bold mb-2 tracking-tighter">24:00:00</div>
@@ -295,7 +376,7 @@ const App: React.FC = () => {
           </div>
         </Section>
 
-        {/* 08. SHOP / BOOKINGS */}
+        {/* 08. SHOP */}
         <Section id={SectionId.SHOP} title="08_SHOP" subtitle="Acquire Assets">
            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {SHOP_CONTENT.map((item, i) => (
@@ -316,7 +397,7 @@ const App: React.FC = () => {
            </div>
         </Section>
 
-        {/* 09. RESOURCES / INTEL */}
+        {/* 09. RESOURCES */}
         <Section id={SectionId.RESOURCES} title="09_INTEL" subtitle="Knowledge Base">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
@@ -415,9 +496,10 @@ const App: React.FC = () => {
              <h2 className="font-['Unica_One'] text-4xl text-gray-800 mb-8 tracking-widest">BLACK BYT3</h2>
              
              <div className="flex flex-wrap justify-center gap-8 mb-12 font-mono text-xs text-gray-500">
-               {['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Client Portal'].map((link, i) => (
-                 <a key={i} href="#" className="hover:text-red-600 transition-colors uppercase">[{link}]</a>
-               ))}
+               <button onClick={() => openModal('LEGAL_PRIVACY')} className="hover:text-red-600 transition-colors uppercase">[Privacy Policy]</button>
+               <button onClick={() => openModal('LEGAL_TERMS')} className="hover:text-red-600 transition-colors uppercase">[Terms of Service]</button>
+               <button className="hover:text-red-600 transition-colors uppercase">[Cookie Policy]</button>
+               <button onClick={() => openModal('LOGIN')} className="hover:text-red-600 transition-colors uppercase">[Client Portal]</button>
              </div>
              
              <div className="flex justify-center gap-8 text-gray-700 mb-8">
@@ -433,7 +515,11 @@ const App: React.FC = () => {
         </footer>
       </main>
 
-      <Terminal onNavigate={scrollToSection} />
+      <Terminal 
+        onNavigate={scrollToSection} 
+        onToggleRedpill={() => setAppState(prev => ({ ...prev, isRedpill: !prev.isRedpill }))} 
+        playSfx={handlePlaySfx}
+      />
     </div>
   );
 };

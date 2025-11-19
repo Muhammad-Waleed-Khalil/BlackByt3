@@ -1,13 +1,18 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Text, PerspectiveCamera } from '@react-three/drei';
+import { Text, PerspectiveCamera, Float } from '@react-three/drei';
 import * as THREE from 'three';
+
+interface SceneProps {
+  isRedpill: boolean;
+}
 
 // Custom Shader Material for the Background (Red Matrix/Circuitry)
 const BackgroundShaderMaterial = {
   uniforms: {
     uTime: { value: 0 },
     uColor: { value: new THREE.Color(0.8, 0.0, 0.0) }, // Blood Red
+    uRedpill: { value: 0.0 }
   },
   vertexShader: `
     varying vec2 vUv;
@@ -19,6 +24,7 @@ const BackgroundShaderMaterial = {
   fragmentShader: `
     uniform float uTime;
     uniform vec3 uColor;
+    uniform float uRedpill;
     varying vec2 vUv;
 
     float random(vec2 st) {
@@ -28,8 +34,13 @@ const BackgroundShaderMaterial = {
     void main() {
         vec2 uv = vUv;
         
+        // Redpill distortion
+        if (uRedpill > 0.5) {
+          uv.x += sin(uv.y * 10.0 + uTime) * 0.02;
+        }
+        
         // Digital rain effect
-        float rainSpeed = 2.0;
+        float rainSpeed = uRedpill > 0.5 ? 5.0 : 2.0;
         float columns = 40.0;
         vec2 gridUv = uv * vec2(columns, 1.0);
         vec2 cellId = floor(gridUv);
@@ -56,24 +67,29 @@ const BackgroundShaderMaterial = {
         
         // Base darkness
         finalColor += vec3(0.02, 0.0, 0.0);
+        
+        if (uRedpill > 0.5) {
+           finalColor += vec3(0.1, 0.0, 0.0); // Add overall red tint
+        }
 
         gl_FragColor = vec4(finalColor, 1.0);
     }
   `
 };
 
-const Background = () => {
+const Background = ({ isRedpill }: { isRedpill: boolean }) => {
   const mesh = useRef<THREE.Mesh>(null);
   const material = useRef<THREE.ShaderMaterial>(null);
 
   useFrame((state) => {
     if (material.current) {
       material.current.uniforms.uTime.value = state.clock.elapsedTime;
+      material.current.uniforms.uRedpill.value = isRedpill ? 1.0 : 0.0;
     }
   });
 
   const shaderArgs = useMemo(() => ({
-    uniforms: BackgroundShaderMaterial.uniforms,
+    uniforms: { ...BackgroundShaderMaterial.uniforms, uRedpill: { value: 0.0 } },
     vertexShader: BackgroundShaderMaterial.vertexShader,
     fragmentShader: BackgroundShaderMaterial.fragmentShader,
   }), []);
@@ -86,14 +102,19 @@ const Background = () => {
   );
 };
 
-const Monolith = () => {
+const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
   const group = useRef<THREE.Group>(null);
+  const [cracked, setCracked] = useState(false);
   
   useFrame((state) => {
     if (group.current) {
-      // Gentle rotation
-      group.current.rotation.y += 0.005;
-      group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      // Gentle rotation or crazy spin on redpill
+      const speed = isRedpill ? 0.02 : 0.005;
+      group.current.rotation.y += speed;
+      
+      if (!isRedpill) {
+         group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      }
       
       // Mouse interaction
       const x = state.pointer.x;
@@ -106,68 +127,85 @@ const Monolith = () => {
   const textProps = {
     font: 'https://fonts.gstatic.com/s/unicaone/v10/DPEuYwSHqSbpSg9cW1dK.woff',
     fontSize: 0.3,
-    color: '#ff0000',
+    color: isRedpill ? '#ff0000' : '#ff0000',
     anchorX: 'center' as const,
     anchorY: 'middle' as const,
   };
+  
+  // Expand parts if cracked
+  const expansion = cracked ? 0.5 : 0;
 
   return (
-    <group ref={group}>
-      {/* The Cube */}
-      <mesh>
-        <boxGeometry args={[2, 3, 2]} />
-        <meshStandardMaterial 
-            color="#050505" 
-            roughness={0.2} 
-            metalness={0.8}
-            emissive="#1a0000"
-            emissiveIntensity={0.2}
-        />
-      </mesh>
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <group ref={group} onClick={() => setCracked(!cracked)}>
+        {/* Core */}
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[1.8, 2.8, 1.8]} />
+           <meshStandardMaterial 
+              color="#000000" 
+              emissive="#220000"
+              emissiveIntensity={isRedpill ? 1 : 0.2}
+          />
+        </mesh>
+        
+        {/* Face 1 (Front) */}
+        <group position={[0, 0, expansion]}>
+           <mesh position={[0, 0, 1]}>
+             <boxGeometry args={[2, 3, 0.1]} />
+             <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
+           </mesh>
+           <Text position={[0, 0.5, 1.06]} {...textProps}>BLACK</Text>
+           <Text position={[0, -0.5, 1.06]} {...textProps}>BYT3</Text>
+        </group>
 
-      {/* Glowing Edges (simulated with slightly larger wireframe) */}
-      <mesh>
-        <boxGeometry args={[2.02, 3.02, 2.02]} />
-        <meshBasicMaterial color="#ff0000" wireframe opacity={0.1} transparent />
-      </mesh>
+        {/* Face 2 (Right) */}
+        <group position={[expansion, 0, 0]} rotation={[0, Math.PI/2, 0]}>
+          <mesh position={[0, 0, 1]}>
+             <boxGeometry args={[2, 3, 0.1]} />
+             <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
+           </mesh>
+          <Text position={[0, 0, 1.06]} {...textProps} fontSize={0.15}>SILENT. SWIFT. SECURE.</Text>
+        </group>
 
-      {/* Face 1: Front */}
-      <Text position={[0, 0.5, 1.01]} {...textProps}>
-        BLACK
-      </Text>
-      <Text position={[0, -0.5, 1.01]} {...textProps}>
-        BYT3
-      </Text>
+        {/* Face 3 (Back) */}
+        <group position={[0, 0, -expansion]} rotation={[0, Math.PI, 0]}>
+           <mesh position={[0, 0, 1]}>
+             <boxGeometry args={[2, 3, 0.1]} />
+             <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
+           </mesh>
+           <Text position={[0, 0, 1.06]} {...textProps} fontSize={0.15}>JOIN THE HIVE</Text>
+        </group>
 
-      {/* Face 2: Right */}
-      <Text position={[1.01, 0, 0]} rotation={[0, Math.PI / 2, 0]} {...textProps} fontSize={0.15}>
-        SILENT. SWIFT. SECURE.
-      </Text>
-
-      {/* Face 3: Back */}
-      <Text position={[0, 0, -1.01]} rotation={[0, Math.PI, 0]} {...textProps} fontSize={0.15}>
-        JOIN THE HIVE
-      </Text>
-
-      {/* Face 4: Left */}
-      <Text position={[-1.01, 0, 0]} rotation={[0, -Math.PI / 2, 0]} {...textProps} fontSize={0.15}>
-        WE HUNT.
-      </Text>
-    </group>
+        {/* Face 4 (Left) */}
+        <group position={[-expansion, 0, 0]} rotation={[0, -Math.PI/2, 0]}>
+           <mesh position={[0, 0, 1]}>
+             <boxGeometry args={[2, 3, 0.1]} />
+             <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
+           </mesh>
+           <Text position={[0, 0, 1.06]} {...textProps} fontSize={0.15}>WE HUNT.</Text>
+        </group>
+        
+        {/* Wireframe Overlay */}
+        <mesh>
+          <boxGeometry args={[2.05, 3.05, 2.05]} />
+          <meshBasicMaterial color="#ff0000" wireframe opacity={0.1} transparent />
+        </mesh>
+      </group>
+    </Float>
   );
 };
 
-const Scene3D = () => {
+const Scene3D: React.FC<SceneProps> = ({ isRedpill }) => {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none md:pointer-events-auto">
+    <div className="fixed inset-0 z-0 pointer-events-none md:pointer-events-auto transition-all duration-1000">
       <Canvas>
         <PerspectiveCamera makeDefault position={[0, 0, 6]} />
         <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} color="#ff0000" intensity={2} />
+        <pointLight position={[10, 10, 10]} color="#ff0000" intensity={isRedpill ? 5 : 2} />
         <pointLight position={[-10, -10, -10]} color="#ff0000" intensity={1} />
         
-        <Background />
-        <Monolith />
+        <Background isRedpill={isRedpill} />
+        <Monolith isRedpill={isRedpill} />
       </Canvas>
     </div>
   );

@@ -1,11 +1,9 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import ClientProviders from './ClientProviders'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
+  metadataBase: new URL('https://blackbyt3.com'),
   title: {
     default: 'Black Byt3 — Silent. Swift. Secure.',
     template: '%s | Black Byt3'
@@ -67,18 +65,19 @@ export const metadata: Metadata = {
     ]
   },
   manifest: '/site.webmanifest',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
+  verification: {
+    // Add google/bing verification codes here when available
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
   themeColor: [
     { media: '(prefers-color-scheme: dark)', color: '#000000' },
     { media: '(prefers-color-scheme: light)', color: '#000000' }
   ],
-  verification: {
-    // Add google/bing verification codes here when available
-  },
 }
 
 export default function RootLayout({
@@ -90,8 +89,11 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
       </head>
-      <body className={inter.className}>
+      <body>
         <ClientProviders>
           {children}
         </ClientProviders>

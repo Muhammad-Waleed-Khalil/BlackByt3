@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+html, body {
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glitch Text Animation */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch-text {
+  animation: glitch 0.3s infinite;
+}
+
+.glitch-hover:hover {
+  animation: glitch 0.3s infinite;
+}
+
+/* Scanline Effect */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(transparent, rgba(255, 0, 0, 0.8), transparent);
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.scanline-fast {
+  animation: scanline 2s linear infinite;
+}
+
+/* VHS Distortion on Scroll */
+@keyframes vhs-distort {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px) skew(-0.5deg); }
+  50% { transform: translateX(2px) skew(0.5deg); }
+  75% { transform: translateX(-1px) skew(-0.3deg); }
+}
+
+.vhs-enter {
+  animation: vhs-distort 0.3s ease-out;
+}
+
+/* Red Glow */
+.red-glow {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3), 0 0 30px rgba(255, 0, 0, 0.1);
+}
+
+.red-glow-intense {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.6), 0 0 60px rgba(255, 0, 0, 0.4), 0 0 80px rgba(255, 0, 0, 0.2);
+}
+
+/* Screen Shake */
+@keyframes screen-shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 2px); }
+  20%, 40%, 60%, 80% { transform: translate(2px, -2px); }
+}
+
+.screen-shake {
+  animation: screen-shake 0.5s ease-in-out;
+}
+
+/* Redacted Text Effect */
+.redacted {
+  position: relative;
+  color: transparent;
+  background: #000000;
+}
+
+.redacted::before {
+  content: 'REDACTED';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff0000;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 0.8em;
+}
+
+.redacted::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    #000000,
+    #000000 2px,
+    #ff0000 2px,
+    #ff0000 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+/* Declassify Animation */
+@keyframes declassify-scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.declassifying .redacted::after {
+  animation: declassify-scan 1.5s ease-out forwards;
+}
+
+.declassified {
+  color: inherit;
+  background: transparent;
+}
+
+.declassified::before,
+.declassified::after {
+  display: none;
+}
+
+/* Loading Sequence */
+.loading-sequence {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+}
+
+@keyframes boot-text {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.boot-text {
+  color: #ff0000;
+  font-size: 1.5rem;
+  animation: boot-text 2s ease-in-out;
+}
+
+/* Particle Trail */
+.particle-trail {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.8), transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  animation: fade-particle 1s ease-out forwards;
+}
+
+@keyframes fade-particle {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* Nuclear Alert */
+@keyframes nuclear-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.nuclear-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.3);
+  z-index: 99998;
+  animation: nuclear-pulse 1s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

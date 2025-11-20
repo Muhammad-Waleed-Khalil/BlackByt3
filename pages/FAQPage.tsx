@@ -40,14 +40,14 @@ const FAQPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
             Frequently Intercepted Questions
           </h1>
-          <p className="font-mono text-gray-400 text-lg max-w-3xl">
+          <p className="font-mono text-gray-300 text-lg max-w-3xl">
             Get answers to common questions about our cybersecurity services, training programs, and methodologies.
           </p>
         </div>
 
         <div className="space-y-4 max-w-3xl">
           {allFaqs.map((faq, i) => (
-            <div key={i} className="border border-gray-800 hover:bg-red-900/5 transition-colors">
+            <div key={i} className="border border-gray-700 hover:bg-red-900/5 transition-colors">
               <button
                 onClick={() => toggleFaq(i)}
                 className="w-full p-4 text-left flex items-center justify-between hover:bg-red-900/10 transition-colors"
@@ -59,12 +59,12 @@ const FAQPage: React.FC = () => {
                 {openFaq === i ? (
                   <ChevronUp className="w-4 h-4 text-red-600" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-gray-600" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 )}
               </button>
               {openFaq === i && (
                 <div className="px-4 pb-4">
-                  <p className="text-gray-400 text-sm font-mono pl-6 leading-relaxed">
+                  <p className="text-gray-300 text-sm font-mono pl-6 leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
@@ -80,9 +80,9 @@ const FAQPage: React.FC = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES_DATA.map((service, idx) => (
-              <div key={idx} className="bg-black/60 border border-gray-800 p-6 hover:border-red-600 transition-colors">
+              <div key={idx} className="bg-black/60 border border-gray-700 p-6 hover:border-red-600 transition-colors">
                 <h4 className="text-white font-['Unica_One'] text-lg mb-3">{service.title}</h4>
-                <p className="text-gray-400 font-mono text-sm mb-4">{service.description}</p>
+                <p className="text-gray-300 font-mono text-sm mb-4">{service.description}</p>
                 <button className="text-red-500 text-xs font-mono uppercase underline hover:text-white">
                   View Details
                 </button>
@@ -96,7 +96,7 @@ const FAQPage: React.FC = () => {
           <div className="bg-red-900/5 border border-red-900/30 p-8 max-w-2xl mx-auto">
             <HelpCircle className="w-12 h-12 text-red-600 mx-auto mb-4" />
             <h3 className="text-2xl font-['Unica_One'] text-white mb-4">Still Have Questions?</h3>
-            <p className="text-gray-400 font-mono text-sm mb-6">
+            <p className="text-gray-300 font-mono text-sm mb-6">
               Can't find the answer you're looking for? Our team is here to help. 
               Contact us through our secure communication channels.
             </p>

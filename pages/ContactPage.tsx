@@ -58,7 +58,7 @@ const ContactPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
             Secure Channel Open
           </h1>
-          <p className="font-mono text-gray-400 text-lg max-w-3xl">
+          <p className="font-mono text-gray-300 text-lg max-w-3xl">
             Ready to strengthen your cybersecurity posture? Our team is standing by to discuss your security needs and requirements.
           </p>
         </div>
@@ -66,7 +66,7 @@ const ContactPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div>
-            <form onSubmit={handleSubmit} className="space-y-6 bg-black/80 p-8 border border-gray-800">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-black/80 p-8 border border-gray-700">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="text-xs text-red-900 font-mono uppercase">Name *</label>
@@ -75,7 +75,7 @@ const ContactPage: React.FC = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                    className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                     placeholder="INPUT_DATA..."
                     required
                   />
@@ -87,7 +87,7 @@ const ContactPage: React.FC = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                    className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                     placeholder="INPUT_DATA..."
                   />
                 </div>
@@ -98,7 +98,7 @@ const ContactPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                    className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                     placeholder="INPUT_DATA..."
                     required
                   />
@@ -110,7 +110,7 @@ const ContactPage: React.FC = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                    className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                     placeholder="INPUT_DATA..."
                   />
                 </div>
@@ -122,7 +122,7 @@ const ContactPage: React.FC = () => {
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                  className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                   required
                 >
                   <option value="">Select Protocol...</option>
@@ -139,7 +139,7 @@ const ContactPage: React.FC = () => {
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
-                    className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                    className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                   >
                     <option value="">Select Range...</option>
                     <option value="under-5k">Under $5,000</option>
@@ -154,7 +154,7 @@ const ContactPage: React.FC = () => {
                     name="contactTime"
                     value={formData.contactTime}
                     onChange={handleInputChange}
-                    className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                    className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                   >
                     <option value="">Select Time...</option>
                     <option value="morning">Morning (9AM - 12PM)</option>
@@ -171,7 +171,7 @@ const ContactPage: React.FC = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors h-32 resize-none text-sm" 
+                  className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors h-32 resize-none text-sm" 
                   placeholder="ENCRYPTED_MESSAGE..."
                   required
                 />
@@ -179,11 +179,11 @@ const ContactPage: React.FC = () => {
 
               <div>
                 <label className="text-xs text-red-900 font-mono uppercase">Attach File (Optional)</label>
-                <div className="border border-gray-800 p-4 bg-black/50">
+                <div className="border border-gray-700 p-4 bg-black/50">
                   <input 
                     type="file" 
                     onChange={handleFileUpload}
-                    className="w-full bg-black text-gray-400 font-mono text-sm file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:bg-red-600 file:text-black file:font-mono hover:file:bg-white transition-colors"
+                    className="w-full bg-black text-gray-300 font-mono text-sm file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:bg-red-600 file:text-black file:font-mono hover:file:bg-white transition-colors"
                     accept=".pdf,.doc,.docx,.txt"
                   />
                   {formData.file && (
@@ -207,7 +207,7 @@ const ContactPage: React.FC = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <h3 className="text-red-500 font-['Unica_One'] text-xl mb-4">Communication Channels</h3>
               <div className="space-y-4">
                 <div>
@@ -225,21 +225,21 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <h3 className="text-red-500 font-['Unica_One'] text-xl mb-4">Response Times</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Clock className="w-4 h-4 text-red-600" />
                   <div>
                     <span className="text-white font-mono text-sm">General Inquiries</span>
-                    <p className="text-gray-400 font-mono text-xs">Within 24 hours</p>
+                    <p className="text-gray-300 font-mono text-xs">Within 24 hours</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <DollarSign className="w-4 h-4 text-red-600" />
                   <div>
                     <span className="text-white font-mono text-sm">Sales & Partnerships</span>
-                    <p className="text-gray-400 font-mono text-xs">Within 4 hours</p>
+                    <p className="text-gray-300 font-mono text-xs">Within 4 hours</p>
                   </div>
                 </div>
               </div>
@@ -247,7 +247,7 @@ const ContactPage: React.FC = () => {
 
             <div className="bg-red-900/5 border border-red-900/30 p-6">
               <h3 className="text-white font-['Unica_One'] text-xl mb-4">Why Choose Black Byt3?</h3>
-              <ul className="space-y-2 text-sm font-mono text-gray-400">
+              <ul className="space-y-2 text-sm font-mono text-gray-300">
                 <li className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-red-600"></span>
                   Expert team with proven track record

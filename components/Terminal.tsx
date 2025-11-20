@@ -113,8 +113,8 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSf
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-    playSfx('type');
-  }
+    if (e.target.value) playSfx('type');
+  };
 
   if (!isOpen) {
     return (
@@ -128,18 +128,18 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSf
   }
 
   return (
-    <div className={`fixed right-0 bottom-0 md:right-6 md:bottom-6 w-full md:w-[400px] bg-black/90 border border-red-800 rounded-t-lg md:rounded-lg backdrop-blur-md shadow-[0_0_30px_rgba(255,0,0,0.2)] transition-all duration-300 z-50 ${isMinimized ? 'h-12' : 'h-[400px]'}`}>
+    <div className={`fixed right-0 bottom-0 md:right-6 md:bottom-6 w-full md:w-[500px] bg-black/95 border border-red-800 rounded-t-lg md:rounded-lg backdrop-blur-md shadow-[0_0_30px_rgba(255,0,0,0.2)] transition-all duration-300 z-50 ${isMinimized ? 'h-12' : 'h-[450px]'}`}>
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-red-900/50 bg-red-950/10 rounded-t-lg cursor-pointer" onClick={() => setIsMinimized(!isMinimized)}>
-        <div className="flex items-center gap-2 text-red-500 font-mono text-xs">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-red-900/50 bg-red-950/10 rounded-t-lg">
+        <div className="flex items-center gap-2 text-red-500 font-mono text-xs pointer-events-none">
           <TerminalIcon className="w-4 h-4" />
           <span>root@blackbyt3:~</span>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={(e) => { e.stopPropagation(); setIsMinimized(!isMinimized); }} className="text-red-500 hover:text-red-300">
+          <button onClick={() => setIsMinimized(!isMinimized)} className="text-red-500 hover:text-red-300 transition-colors">
             {isMinimized ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
           </button>
-          <button onClick={(e) => { e.stopPropagation(); setIsOpen(false); }} className="text-red-500 hover:text-red-300">
+          <button onClick={() => setIsOpen(false)} className="text-red-500 hover:text-red-300 transition-colors">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -147,34 +147,38 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSf
 
       {/* Body */}
       {!isMinimized && (
-        <div className="p-4 h-[calc(100%-48px)] overflow-y-auto no-scrollbar font-mono text-sm text-red-500/80" onClick={() => document.getElementById('terminal-input')?.focus()}>
-          {history.map((cmd, i) => (
-            <div key={i} className="mb-2 break-words">
-              {cmd.type === 'user' && (
-                <div className="text-white/50 flex gap-2">
-                  <span className="text-red-600">➜</span>
-                  <span>{cmd.input}</span>
+        <div className="p-4 h-[calc(100%-48px)] flex flex-col">
+          <div className="flex-1 overflow-y-auto no-scrollbar font-mono text-sm text-red-500/80 mb-2">
+            {history.map((cmd, i) => (
+              <div key={i} className="mb-2 break-words">
+                {cmd.type === 'user' && (
+                  <div className="text-white/50 flex gap-2">
+                    <span className="text-red-600">➜</span>
+                    <span>{cmd.input}</span>
+                  </div>
+                )}
+                <div className={`${cmd.type === 'error' ? 'text-red-400 font-bold glitch-text' : cmd.type === 'success' ? 'text-green-500' : 'text-red-500/80'}`}>
+                  {cmd.output}
                 </div>
-              )}
-              <div className={`${cmd.type === 'error' ? 'text-red-400 font-bold glitch-text' : cmd.type === 'success' ? 'text-green-500' : 'text-red-500/80'}`}>
-                {cmd.output}
               </div>
-            </div>
-          ))}
-          <div className="flex gap-2 items-center mt-2">
-            <span className="text-red-500">root@blackbyt3:~#</span>
+            ))}
+            <div ref={bottomRef} />
+          </div>
+
+          <div className="flex gap-2 items-center border-t border-red-900/30 pt-2">
+            <span className="text-red-500 font-mono text-sm">root@blackbyt3:~#</span>
             <input
               id="terminal-input"
               type="text"
               value={input}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
-              className="bg-transparent border-none outline-none text-red-500 w-full placeholder-red-900/50"
-              autoFocus
+              className="bg-transparent border-none outline-none text-red-500 w-full placeholder-red-900/50 font-mono text-sm focus:outline-none focus:ring-0"
               autoComplete="off"
+              spellCheck={false}
+              placeholder="type 'help' for commands..."
             />
           </div>
-          <div ref={bottomRef} />
         </div>
       )}
     </div>

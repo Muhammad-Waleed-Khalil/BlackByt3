@@ -36,7 +36,7 @@ const AboutPage: React.FC<AboutPageProps> = () => {
                 {ABOUT_CONTENT.values.map((val, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <Target className="w-3 h-3 text-red-600" />
-                    <span className="text-gray-400 font-mono text-xs">{val}</span>
+                    <span className="text-gray-300 font-mono text-xs">{val}</span>
                   </div>
                 ))}
               </div>

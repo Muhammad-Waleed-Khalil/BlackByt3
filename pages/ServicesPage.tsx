@@ -29,7 +29,7 @@ const ServicesPage: React.FC<ServicesPageProps> = () => {
         <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="bg-black/50 border border-red-900/30 p-6">
             <h3 className="text-red-500 font-['Unica_One'] text-xl mb-4">Cybersecurity Services</h3>
-            <ul className="space-y-2 text-sm font-mono text-gray-400">
+            <ul className="space-y-2 text-sm font-mono text-gray-300">
               <li>• Penetration Testing</li>
               <li>• GRC (Governance, Risk & Compliance)</li>
               <li>• Red Teaming</li>
@@ -41,7 +41,7 @@ const ServicesPage: React.FC<ServicesPageProps> = () => {
 
           <div className="bg-black/50 border border-red-900/30 p-6">
             <h3 className="text-red-500 font-['Unica_One'] text-xl mb-4">AI & ML Solutions</h3>
-            <ul className="space-y-2 text-sm font-mono text-gray-400">
+            <ul className="space-y-2 text-sm font-mono text-gray-300">
               <li>• Custom ML Models</li>
               <li>• Automation & Orchestration</li>
               <li>• AI-integrated Web & App Solutions</li>
@@ -50,7 +50,7 @@ const ServicesPage: React.FC<ServicesPageProps> = () => {
 
           <div className="bg-black/50 border border-red-900/30 p-6">
             <h3 className="text-red-500 font-['Unica_One'] text-xl mb-4">Hardware Security Tools</h3>
-            <ul className="space-y-2 text-sm font-mono text-gray-400">
+            <ul className="space-y-2 text-sm font-mono text-gray-300">
               <li>• Wi-Fi pentesting</li>
               <li>• HID attacks</li>
               <li>• RFID/NFC tools</li>

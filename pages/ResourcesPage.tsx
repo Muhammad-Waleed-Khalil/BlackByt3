@@ -55,7 +55,7 @@ const ResourcesPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
             Knowledge Base
           </h1>
-          <p className="font-mono text-gray-400 text-lg max-w-3xl">
+          <p className="font-mono text-gray-300 text-lg max-w-3xl">
             Access our research, whitepapers, tools, and educational resources to stay ahead of emerging threats and security trends.
           </p>
         </div>
@@ -66,16 +66,16 @@ const ResourcesPage: React.FC = () => {
               Latest Transmissions
             </h3>
             {researchPapers.map((paper, i) => (
-              <div key={i} className="flex items-center justify-between py-3 hover:bg-red-900/5 transition-colors cursor-pointer group border-b border-gray-800/50">
+              <div key={i} className="flex items-center justify-between py-3 hover:bg-red-900/5 transition-colors cursor-pointer group border-b border-gray-700/50">
                 <div className="flex-1">
-                  <span className="text-gray-400 font-mono text-sm group-hover:text-white">{paper.title}</span>
+                  <span className="text-gray-300 font-mono text-sm group-hover:text-white">{paper.title}</span>
                   <div className="flex items-center gap-4 mt-1">
                     <span className="text-xs text-red-900 uppercase border border-red-900/30 px-2 py-1 rounded">{paper.type}</span>
-                    <span className="text-xs text-gray-600">{paper.date}</span>
-                    <span className="text-xs text-gray-600">{paper.downloads} downloads</span>
+                    <span className="text-xs text-gray-500">{paper.date}</span>
+                    <span className="text-xs text-gray-500">{paper.downloads} downloads</span>
                   </div>
                 </div>
-                <ExternalLink className="w-4 h-4 text-gray-600 group-hover:text-red-500" />
+                <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-red-500" />
               </div>
             ))}
           </div>
@@ -87,12 +87,12 @@ const ResourcesPage: React.FC = () => {
               </h3>
               <div className="space-y-4">
                 {tools.map((tool, i) => (
-                  <div key={i} className="bg-black/60 border border-gray-800 p-4 hover:border-red-600 transition-colors">
+                  <div key={i} className="bg-black/60 border border-gray-700 p-4 hover:border-red-600 transition-colors">
                     <div className="flex justify-between items-start mb-2">
                       <h4 className="text-white font-mono text-sm">{tool.name}</h4>
-                      <span className="text-xs text-gray-500 font-mono">{tool.downloads}</span>
+                      <span className="text-xs text-gray-400 font-mono">{tool.downloads}</span>
                     </div>
-                    <p className="text-gray-400 font-mono text-xs mb-2">{tool.description}</p>
+                    <p className="text-gray-300 font-mono text-xs mb-2">{tool.description}</p>
                     <span className="text-xs text-red-900 uppercase border border-red-900/30 px-2 py-1 rounded">{tool.type}</span>
                   </div>
                 ))}
@@ -105,7 +105,7 @@ const ResourcesPage: React.FC = () => {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {PARTNERSHIPS_CONTENT.strategic.map((partner, i) => (
-                  <span key={i} className="text-gray-500 font-mono text-sm border border-gray-800 px-3 py-1 hover:text-red-500 hover:border-red-500 cursor-pointer transition-colors">
+                  <span key={i} className="text-gray-400 font-mono text-sm border border-gray-700 px-3 py-1 hover:text-red-500 hover:border-red-500 cursor-pointer transition-colors">
                     {partner}
                   </span>
                 ))}
@@ -120,39 +120,39 @@ const ResourcesPage: React.FC = () => {
             Research & Whitepapers
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <BookOpen className="w-8 h-8 text-red-600 mb-4" />
               <h4 className="text-white font-['Unica_One'] text-lg mb-2">Latest Research</h4>
-              <p className="text-gray-400 font-mono text-sm mb-4">
+              <p className="text-gray-300 font-mono text-sm mb-4">
                 Cutting-edge security research covering emerging threats, vulnerabilities, and defense strategies.
               </p>
-              <ul className="space-y-1 text-xs font-mono text-gray-500">
+              <ul className="space-y-1 text-xs font-mono text-gray-400">
                 <li>• Zero-day analysis reports</li>
                 <li>• Threat intelligence briefs</li>
                 <li>• Security trend analysis</li>
               </ul>
             </div>
 
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <FileText className="w-8 h-8 text-red-600 mb-4" />
               <h4 className="text-white font-['Unica_One'] text-lg mb-2">Whitepapers</h4>
-              <p className="text-gray-400 font-mono text-sm mb-4">
+              <p className="text-gray-300 font-mono text-sm mb-4">
                 In-depth technical documentation on cybersecurity best practices and methodologies.
               </p>
-              <ul className="space-y-1 text-xs font-mono text-gray-500">
+              <ul className="space-y-1 text-xs font-mono text-gray-400">
                 <li>• Industry compliance guides</li>
                 <li>• Security architecture docs</li>
                 <li>• Risk assessment frameworks</li>
               </ul>
             </div>
 
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <Users className="w-8 h-8 text-red-600 mb-4" />
               <h4 className="text-white font-['Unica_One'] text-lg mb-2">Press & Media</h4>
-              <p className="text-gray-400 font-mono text-sm mb-4">
+              <p className="text-gray-300 font-mono text-sm mb-4">
                 Media coverage, conference presentations, and expert commentary on cybersecurity topics.
               </p>
-              <ul className="space-y-1 text-xs font-mono text-gray-500">
+              <ul className="space-y-1 text-xs font-mono text-gray-400">
                 <li>• Conference presentations</li>
                 <li>• Expert interviews</li>
                 <li>• Industry commentary</li>
@@ -165,7 +165,7 @@ const ResourcesPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-red-900/5 border border-red-900/30 p-8">
             <h3 className="text-2xl font-['Unica_One'] text-white mb-4">For Researchers</h3>
-            <p className="text-gray-400 font-mono text-sm mb-4">
+            <p className="text-gray-300 font-mono text-sm mb-4">
               Access our comprehensive research database, vulnerability disclosures, and security advisories.
             </p>
             <button className="bg-red-600 text-black font-mono font-bold text-xs px-6 py-3 hover:bg-white transition-colors">
@@ -173,9 +173,9 @@ const ResourcesPage: React.FC = () => {
             </button>
           </div>
 
-          <div className="bg-black/60 border border-gray-800 p-8">
+          <div className="bg-black/60 border border-gray-700 p-8">
             <h3 className="text-2xl font-['Unica_One'] text-white mb-4">For Developers</h3>
-            <p className="text-gray-400 font-mono text-sm mb-4">
+            <p className="text-gray-300 font-mono text-sm mb-4">
               Download security tools, code libraries, and development frameworks for secure application development.
             </p>
             <button className="bg-white text-black font-mono font-bold text-xs px-6 py-3 hover:bg-red-600 hover:text-white transition-colors">

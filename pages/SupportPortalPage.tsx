@@ -17,12 +17,12 @@ const SupportPortalPage: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
               Client Portal Access
             </h1>
-            <p className="font-mono text-gray-400 text-lg max-w-3xl">
+            <p className="font-mono text-gray-300 text-lg max-w-3xl">
               Secure access to your project data, support tickets, and documentation.
             </p>
           </div>
 
-          <div className="bg-black/80 p-8 border border-gray-800 max-w-md mx-auto">
+          <div className="bg-black/80 p-8 border border-gray-700 max-w-md mx-auto">
             <div className="text-center mb-8">
               <Shield className="w-12 h-12 text-red-600 mx-auto mb-4" />
               <h3 className="text-white font-['Unica_One'] text-xl">Secure Login</h3>
@@ -33,7 +33,7 @@ const SupportPortalPage: React.FC = () => {
                 <label className="text-xs text-red-900 font-mono uppercase">Client ID</label>
                 <input 
                   type="text" 
-                  className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                  className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                   placeholder="BB-CLIENT-001"
                 />
               </div>
@@ -41,7 +41,7 @@ const SupportPortalPage: React.FC = () => {
                 <label className="text-xs text-red-900 font-mono uppercase">Password</label>
                 <input 
                   type="password" 
-                  className="w-full bg-black border-b border-gray-800 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
+                  className="w-full bg-black border-b border-gray-700 focus:border-red-600 outline-none text-white py-2 font-mono transition-colors text-sm" 
                   placeholder="••••••••"
                 />
               </div>
@@ -54,7 +54,7 @@ const SupportPortalPage: React.FC = () => {
             </form>
 
             <div className="mt-6 text-center">
-              <p className="text-gray-500 font-mono text-xs">
+              <p className="text-gray-400 font-mono text-xs">
                 Demo credentials: BB-CLIENT-001 / demo123
               </p>
             </div>
@@ -123,7 +123,7 @@ const SupportPortalPage: React.FC = () => {
             </h2>
             <button 
               onClick={() => setIsAuthenticated(false)}
-              className="text-gray-400 hover:text-red-600 font-mono text-sm"
+              className="text-gray-300 hover:text-red-600 font-mono text-sm"
             >
               Logout
             </button>
@@ -131,13 +131,13 @@ const SupportPortalPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-4 text-white">
             Client Portal
           </h1>
-          <p className="font-mono text-gray-400">
+          <p className="font-mono text-gray-300">
             Welcome back, Muhammad. Here's your project overview and support dashboard.
           </p>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex space-x-1 bg-black/60 p-1 border border-gray-800 mb-8">
+        <div className="flex space-x-1 bg-black/60 p-1 border border-gray-700 mb-8">
           {[
             { id: 'dashboard', label: 'Dashboard', icon: User },
             { id: 'projects', label: 'Projects', icon: FileText },
@@ -162,31 +162,31 @@ const SupportPortalPage: React.FC = () => {
         {/* Dashboard Tab */}
         {activeTab === 'dashboard' && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <FileText className="w-5 h-5 text-red-600" />
                 <h3 className="text-white font-['Unica_One']">Active Projects</h3>
               </div>
               <div className="text-3xl font-mono font-bold text-red-500 mb-2">3</div>
-              <p className="text-gray-400 font-mono text-sm">2 in progress, 1 planning</p>
+              <p className="text-gray-300 font-mono text-sm">2 in progress, 1 planning</p>
             </div>
 
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <MessageSquare className="w-5 h-5 text-red-600" />
                 <h3 className="text-white font-['Unica_One']">Open Tickets</h3>
               </div>
               <div className="text-3xl font-mono font-bold text-red-500 mb-2">2</div>
-              <p className="text-gray-400 font-mono text-sm">1 high priority</p>
+              <p className="text-gray-300 font-mono text-sm">1 high priority</p>
             </div>
 
-            <div className="bg-black/60 border border-gray-800 p-6">
+            <div className="bg-black/60 border border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <Download className="w-5 h-5 text-red-600" />
                 <h3 className="text-white font-['Unica_One']">Documents</h3>
               </div>
               <div className="text-3xl font-mono font-bold text-red-500 mb-2">9</div>
-              <p className="text-gray-400 font-mono text-sm">Reports & deliverables</p>
+              <p className="text-gray-300 font-mono text-sm">Reports & deliverables</p>
             </div>
           </div>
         )}
@@ -195,11 +195,11 @@ const SupportPortalPage: React.FC = () => {
         {activeTab === 'projects' && (
           <div className="space-y-6">
             {mockProjects.map((project) => (
-              <div key={project.id} className="bg-black/60 border border-gray-800 p-6 hover:border-red-600 transition-colors">
+              <div key={project.id} className="bg-black/60 border border-gray-700 p-6 hover:border-red-600 transition-colors">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h4 className="text-white font-['Unica_One'] text-xl mb-2">{project.name}</h4>
-                    <p className="text-gray-400 font-mono text-sm">ID: {project.id}</p>
+                    <p className="text-gray-300 font-mono text-sm">ID: {project.id}</p>
                   </div>
                   <span className={`text-xs font-mono border px-2 py-1 uppercase ${
                     project.status === 'Completed' 
@@ -214,7 +214,7 @@ const SupportPortalPage: React.FC = () => {
 
                 <div className="mb-4">
                   <div className="flex justify-between text-sm font-mono mb-2">
-                    <span className="text-gray-400">Progress</span>
+                    <span className="text-gray-300">Progress</span>
                     <span className="text-red-500">{project.progress}%</span>
                   </div>
                   <div className="w-full bg-gray-800 h-2">
@@ -228,15 +228,15 @@ const SupportPortalPage: React.FC = () => {
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
                     <span className="text-red-900 font-mono uppercase block mb-1">Due Date</span>
-                    <span className="text-gray-400 font-mono">{project.dueDate}</span>
+                    <span className="text-gray-300 font-mono">{project.dueDate}</span>
                   </div>
                   <div>
                     <span className="text-red-900 font-mono uppercase block mb-1">Last Update</span>
-                    <span className="text-gray-400 font-mono">{project.lastUpdate}</span>
+                    <span className="text-gray-300 font-mono">{project.lastUpdate}</span>
                   </div>
                   <div>
                     <span className="text-red-900 font-mono uppercase block mb-1">Reports</span>
-                    <span className="text-gray-400 font-mono">{project.reports} files</span>
+                    <span className="text-gray-300 font-mono">{project.reports} files</span>
                   </div>
                 </div>
               </div>
@@ -255,11 +255,11 @@ const SupportPortalPage: React.FC = () => {
             </div>
             
             {mockTickets.map((ticket) => (
-              <div key={ticket.id} className="bg-black/60 border border-gray-800 p-6">
+              <div key={ticket.id} className="bg-black/60 border border-gray-700 p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h4 className="text-white font-mono text-lg mb-1">{ticket.title}</h4>
-                    <p className="text-gray-400 font-mono text-sm">ID: {ticket.id}</p>
+                    <p className="text-gray-300 font-mono text-sm">ID: {ticket.id}</p>
                   </div>
                   <div className="text-right">
                     <span className={`text-xs font-mono border px-2 py-1 uppercase block mb-1 ${
@@ -282,11 +282,11 @@ const SupportPortalPage: React.FC = () => {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-red-900 font-mono uppercase block mb-1">Created</span>
-                    <span className="text-gray-400 font-mono">{ticket.created}</span>
+                    <span className="text-gray-300 font-mono">{ticket.created}</span>
                   </div>
                   <div>
                     <span className="text-red-900 font-mono uppercase block mb-1">Assigned</span>
-                    <span className="text-gray-400 font-mono">{ticket.assigned}</span>
+                    <span className="text-gray-300 font-mono">{ticket.assigned}</span>
                   </div>
                 </div>
               </div>
@@ -306,12 +306,12 @@ const SupportPortalPage: React.FC = () => {
                 { name: 'Remediation Guide', type: 'PDF', date: '2025-11-17', size: '1.3 MB' },
                 { name: 'AWS Assessment Results', type: 'PDF', date: '2025-11-10', size: '5.2 MB' }
               ].map((doc, idx) => (
-                <div key={idx} className="bg-black/60 border border-gray-800 p-4 flex items-center justify-between hover:border-red-600 transition-colors">
+                <div key={idx} className="bg-black/60 border border-gray-700 p-4 flex items-center justify-between hover:border-red-600 transition-colors">
                   <div className="flex items-center gap-3">
                     <FileText className="w-5 h-5 text-red-600" />
                     <div>
                       <h4 className="text-white font-mono text-sm">{doc.name}</h4>
-                      <p className="text-gray-400 font-mono text-xs">{doc.type} • {doc.size} • {doc.date}</p>
+                      <p className="text-gray-300 font-mono text-xs">{doc.type} • {doc.size} • {doc.date}</p>
                     </div>
                   </div>
                   <button className="text-red-600 hover:text-red-500 transition-colors">

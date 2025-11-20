@@ -38,44 +38,44 @@ const ProjectsPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
             Declassified Files
           </h1>
-          <p className="font-mono text-gray-400 text-lg max-w-3xl">
+          <p className="font-mono text-gray-300 text-lg max-w-3xl">
             Real-world security assessments and red team engagements that showcase our expertise in identifying and mitigating complex security threats.
           </p>
         </div>
 
         {/* Project Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
-          <div className="bg-black/60 border border-gray-800 p-6 text-center">
+          <div className="bg-black/60 border border-gray-700 p-6 text-center">
             <FolderOpen className="w-8 h-8 text-red-600 mx-auto mb-4" />
             <div className="text-2xl font-mono font-bold text-white mb-2">{allProjects.length}</div>
-            <p className="text-gray-400 font-mono text-sm">Total Projects</p>
+            <p className="text-gray-300 font-mono text-sm">Total Projects</p>
           </div>
-          <div className="bg-black/60 border border-gray-800 p-6 text-center">
+          <div className="bg-black/60 border border-gray-700 p-6 text-center">
             <ExternalLink className="w-8 h-8 text-red-600 mx-auto mb-4" />
             <div className="text-2xl font-mono font-bold text-white mb-2">100%</div>
-            <p className="text-gray-400 font-mono text-sm">Success Rate</p>
+            <p className="text-gray-300 font-mono text-sm">Success Rate</p>
           </div>
-          <div className="bg-black/60 border border-gray-800 p-6 text-center">
+          <div className="bg-black/60 border border-gray-700 p-6 text-center">
             <div className="text-2xl font-mono font-bold text-white mb-2">45+</div>
-            <p className="text-gray-400 font-mono text-sm">Critical Findings</p>
+            <p className="text-gray-300 font-mono text-sm">Critical Findings</p>
           </div>
-          <div className="bg-black/60 border border-gray-800 p-6 text-center">
+          <div className="bg-black/60 border border-gray-700 p-6 text-center">
             <div className="text-2xl font-mono font-bold text-white mb-2">24/7</div>
-            <p className="text-gray-400 font-mono text-sm">Response Time</p>
+            <p className="text-gray-300 font-mono text-sm">Response Time</p>
           </div>
         </div>
 
         {/* Projects List */}
         <div className="space-y-12">
           {allProjects.map((project, i) => (
-            <div key={project.id} className="group relative pl-8 border-l border-gray-800 hover:border-red-600 transition-colors cursor-pointer py-2">
-              <div className="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-black border border-gray-800 group-hover:bg-red-600 group-hover:border-red-600 transition-colors" />
+            <div key={project.id} className="group relative pl-8 border-l border-gray-700 hover:border-red-600 transition-colors cursor-pointer py-2">
+              <div className="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-black border border-gray-700 group-hover:bg-red-600 group-hover:border-red-600 transition-colors" />
               
               <h3 className="text-2xl text-white font-bold mb-4 group-hover:text-red-500 transition-colors font-['Unica_One'] uppercase tracking-wider">
                 CASE_STUDY_{project.id}: {project.title}
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-mono text-xs text-gray-400">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-mono text-xs text-gray-300">
                 <div>
                   <span className="text-red-900 block mb-1 uppercase font-bold">Client</span>
                   <span className="bg-white text-black px-1 inline-block font-bold">{project.client}</span>
@@ -133,9 +133,9 @@ const ProjectsPage: React.FC = () => {
                 downloads: "650"
               }
             ].map((tool, idx) => (
-              <div key={idx} className="bg-black/60 border border-gray-800 p-6 hover:border-red-600 transition-colors">
+              <div key={idx} className="bg-black/60 border border-gray-700 p-6 hover:border-red-600 transition-colors">
                 <h4 className="text-white font-['Unica_One'] text-lg mb-2">{tool.name}</h4>
-                <p className="text-gray-400 font-mono text-sm mb-4">{tool.description}</p>
+                <p className="text-gray-300 font-mono text-sm mb-4">{tool.description}</p>
                 <div className="flex justify-between items-center">
                   <span className={`text-xs font-mono border px-2 py-1 uppercase ${
                     tool.status === 'Active' 
@@ -144,7 +144,7 @@ const ProjectsPage: React.FC = () => {
                   }`}>
                     {tool.status}
                   </span>
-                  <span className="text-gray-500 font-mono text-xs">{tool.downloads} downloads</span>
+                  <span className="text-gray-400 font-mono text-xs">{tool.downloads} downloads</span>
                 </div>
               </div>
             ))}

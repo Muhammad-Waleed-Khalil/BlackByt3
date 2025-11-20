@@ -124,13 +124,13 @@ const LegalPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
             Legal Information
           </h1>
-          <p className="font-mono text-gray-400 text-lg max-w-3xl">
+          <p className="font-mono text-gray-300 text-lg max-w-3xl">
             Our commitment to transparency and legal compliance in all our operations and services.
           </p>
         </div>
 
         {/* Policy Navigation */}
-        <div className="flex space-x-1 bg-black/60 p-1 border border-gray-800 mb-8">
+        <div className="flex space-x-1 bg-black/60 p-1 border border-gray-700 mb-8">
           {Object.entries(policies).map(([key, policy]) => (
             <button
               key={key}
@@ -148,7 +148,7 @@ const LegalPage: React.FC = () => {
         </div>
 
         {/* Policy Content */}
-        <div className="bg-black/60 border border-gray-800 p-8">
+        <div className="bg-black/60 border border-gray-700 p-8">
           <div className="flex items-center gap-3 mb-6">
             <currentPolicy.icon className="w-6 h-6 text-red-600" />
             <h2 className="text-2xl font-['Unica_One'] text-white">{currentPolicy.title}</h2>
@@ -175,21 +175,21 @@ const LegalPage: React.FC = () => {
               <AlertTriangle className="w-5 h-5 text-red-600" />
               <h3 className="text-white font-['Unica_One'] text-xl">Important Notice</h3>
             </div>
-            <p className="text-gray-400 font-mono text-sm mb-4">
+            <p className="text-gray-300 font-mono text-sm mb-4">
               By using our services, you acknowledge that you have read and understood our legal policies. 
               These policies may be updated from time to time.
             </p>
-            <p className="text-gray-400 font-mono text-sm">
+            <p className="text-gray-300 font-mono text-sm">
               For questions about our legal policies, please contact our legal team.
             </p>
           </div>
 
-          <div className="bg-black/60 border border-gray-800 p-6">
+          <div className="bg-black/60 border border-gray-700 p-6">
             <div className="flex items-center gap-3 mb-4">
               <Shield className="w-5 h-5 text-red-600" />
               <h3 className="text-white font-['Unica_One'] text-xl">Compliance</h3>
             </div>
-            <ul className="space-y-2 text-sm font-mono text-gray-400">
+            <ul className="space-y-2 text-sm font-mono text-gray-300">
               <li className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-red-600"></span>
                 GDPR Compliant
@@ -212,12 +212,12 @@ const LegalPage: React.FC = () => {
 
         {/* Contact Information */}
         <div className="mt-16 text-center">
-          <div className="bg-black/60 border border-gray-800 p-8 max-w-2xl mx-auto">
+          <div className="bg-black/60 border border-gray-700 p-8 max-w-2xl mx-auto">
             <h3 className="text-white font-['Unica_One'] text-2xl mb-4">Legal Inquiries</h3>
-            <p className="text-gray-400 font-mono text-sm mb-6">
+            <p className="text-gray-300 font-mono text-sm mb-6">
               For legal matters, compliance questions, or policy clarifications.
             </p>
-            <div className="space-y-2 text-sm font-mono text-gray-400">
+            <div className="space-y-2 text-sm font-mono text-gray-300">
               <p><span className="text-red-500">Email:</span> legal@blackbyt3.com</p>
               <p><span className="text-red-500">Address:</span> Islamabad, Pakistan</p>
             </div>

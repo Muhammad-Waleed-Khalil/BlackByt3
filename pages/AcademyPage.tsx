@@ -45,12 +45,12 @@ const AcademyPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="space-y-4">
             {ACADEMY_CONTENT.offerings.map((offer, idx) => (
-              <div key={idx} className="flex items-center justify-between border-b border-gray-800 pb-4 group cursor-pointer hover:border-red-600">
+              <div key={idx} className="flex items-center justify-between border-b border-gray-700 pb-4 group cursor-pointer hover:border-red-600">
                 <div className="flex items-center gap-4">
                   <div className="text-red-900 group-hover:text-red-500 transition-colors">
                      <Lock className="w-5 h-5" />
                   </div>
-                  <span className="font-mono text-gray-400 group-hover:text-white transition-colors text-sm uppercase">{offer}</span>
+                  <span className="font-mono text-gray-300 group-hover:text-white transition-colors text-sm uppercase">{offer}</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-gray-700 group-hover:text-red-500 group-hover:translate-x-2 transition-all" />
               </div>
@@ -61,7 +61,7 @@ const AcademyPage: React.FC = () => {
           <div className="bg-red-900/5 border border-red-900/30 p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:bg-red-950/10 transition-all">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
              <h3 className="text-2xl font-['Unica_One'] text-white mb-2 z-10 group-hover:text-red-500 transition-colors">PRACTICAL AWS CERTIFIED</h3>
-             <p className="text-gray-400 font-mono text-xs mb-6 z-10">
+             <p className="text-gray-300 font-mono text-xs mb-6 z-10">
                 Deployment-ready cloud security skills. No theory, just war stories. 
                 Learn to secure EC2, S3, IAM, and Lambda in hostile environments.
              </p>
@@ -78,31 +78,31 @@ const AcademyPage: React.FC = () => {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map((course, idx) => (
-              <div key={idx} className="bg-black/60 border border-gray-800 p-6 hover:border-red-600 transition-all group">
+              <div key={idx} className="bg-black/60 border border-gray-700 p-6 hover:border-red-600 transition-all group">
                 <div className="flex items-center gap-2 mb-4">
                   <BookOpen className="w-5 h-5 text-red-600 group-hover:text-red-500" />
                   <h4 className="text-white font-['Unica_One'] text-lg group-hover:text-red-500 transition-colors">
                     {course.title}
                   </h4>
                 </div>
-                <p className="text-gray-400 font-mono text-sm mb-4">{course.description}</p>
+                <p className="text-gray-300 font-mono text-sm mb-4">{course.description}</p>
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-xs font-mono">
-                    <span className="text-gray-500">Duration:</span>
+                    <span className="text-gray-400">Duration:</span>
                     <span className="text-white">{course.duration}</span>
                   </div>
                   <div className="flex justify-between text-xs font-mono">
-                    <span className="text-gray-500">Level:</span>
+                    <span className="text-gray-400">Level:</span>
                     <span className="text-white">{course.level}</span>
                   </div>
                   <div className="flex justify-between text-xs font-mono">
-                    <span className="text-gray-500">Price:</span>
+                    <span className="text-gray-400">Price:</span>
                     <span className="text-red-500 font-bold">{course.price}</span>
                   </div>
                 </div>
                 <ul className="space-y-1 mb-4">
                   {course.highlights.map((highlight, i) => (
-                    <li key={i} className="text-xs font-mono text-gray-500 flex items-center gap-2">
+                    <li key={i} className="text-xs font-mono text-gray-400 flex items-center gap-2">
                       <span className="w-1 h-1 bg-red-600"></span>
                       {highlight}
                     </li>
@@ -118,7 +118,7 @@ const AcademyPage: React.FC = () => {
 
         {/* Certifications */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-black/60 border border-gray-800 p-8">
+          <div className="bg-black/60 border border-gray-700 p-8">
             <div className="flex items-center gap-3 mb-6">
               <Award className="w-6 h-6 text-red-600" />
               <h3 className="text-2xl font-['Unica_One'] text-white">Black Byt3 Certifications</h3>
@@ -126,19 +126,19 @@ const AcademyPage: React.FC = () => {
             <div className="space-y-4">
               <div className="border-l-2 border-red-600 pl-4">
                 <h4 className="text-red-500 font-mono text-sm mb-2">Practical AWS Certified</h4>
-                <p className="text-gray-400 text-sm font-mono">
+                <p className="text-gray-300 text-sm font-mono">
                   Hands-on AWS security assessment and hardening skills.
                 </p>
               </div>
               <div className="border-l-2 border-red-600 pl-4">
                 <h4 className="text-red-500 font-mono text-sm mb-2">Machine Learning Certified</h4>
-                <p className="text-gray-400 text-sm font-mono">
+                <p className="text-gray-300 text-sm font-mono">
                   AI/ML security applications and adversarial techniques.
                 </p>
               </div>
               <div className="border-l-2 border-red-600 pl-4">
                 <h4 className="text-red-500 font-mono text-sm mb-2">Cyber Security Mastery</h4>
-                <p className="text-gray-400 text-sm font-mono">
+                <p className="text-gray-300 text-sm font-mono">
                   Comprehensive cybersecurity skill validation.
                 </p>
               </div>
@@ -150,11 +150,11 @@ const AcademyPage: React.FC = () => {
               <Users className="w-6 h-6 text-red-600" />
               <h3 className="text-2xl font-['Unica_One'] text-white">OCMP Program</h3>
             </div>
-            <p className="text-gray-400 font-mono text-sm mb-4">
+            <p className="text-gray-300 font-mono text-sm mb-4">
               One-to-One Cyber Mentor Program provides personalized cybersecurity education, 
               hands-on experience, and career guidance tailored to individual goals.
             </p>
-            <ul className="space-y-2 text-sm font-mono text-gray-400">
+            <ul className="space-y-2 text-sm font-mono text-gray-300">
               <li className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-red-600"></span>
                 Personalized learning roadmap

@@ -11,7 +11,11 @@ export enum SectionId {
   RESOURCES = 'resources',
   SHOP = 'shop',
   FAQ = 'faq',
-  CONTACT = 'contact'
+  CONTACT = 'contact',
+  PARTNERSHIPS = 'partnerships',
+  CAREERS = 'careers',
+  SUPPORT = 'support',
+  LEGAL = 'legal'
 }
 
 export interface Command {

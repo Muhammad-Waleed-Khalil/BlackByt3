@@ -63,7 +63,7 @@ const DetailedService: React.FC<DetailedServiceProps> = ({ service, index }) => 
         <ul className="space-y-2 mt-6">
           {service.details?.map((detail, i) => (
             <li key={i} className="flex items-center gap-2 text-sm text-gray-400 font-mono hover:text-white transition-colors">
-              <span className="text-red-800">>></span>
+              <span className="text-red-800">{">>"}</span>
               {detail}
             </li>
           ))}

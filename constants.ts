@@ -1,5 +1,95 @@
 import { SectionId, ServiceItem, TeamMember, ProjectCaseStudy, ShopItem, FaqItem } from './types';
 
+// Mega Menu Navigation Structure
+export const MEGA_MENU_CATEGORIES = [
+  {
+    id: 'solutions',
+    label: 'SOLUTIONS',
+    icon: 'Briefcase',
+    subcategories: [
+      {
+        title: 'SERVICES',
+        items: [
+          { id: SectionId.SERVICES, label: 'Services', description: 'Cybersecurity, AI/ML, Hardware Tools' }
+        ]
+      },
+      {
+        title: 'ACADEMY',
+        items: [
+          { id: SectionId.ACADEMY, label: 'Academy', description: 'Courses, Certifications, OCMP' }
+        ]
+      },
+      {
+        title: 'SOLUTIONS',
+        items: [
+          { id: SectionId.SOLUTIONS, label: 'Solutions', description: 'Industry-specific solutions' }
+        ]
+      },
+      {
+        title: 'PROJECTS',
+        items: [
+          { id: SectionId.PROJECTS, label: 'Portfolio', description: 'Case studies and success stories' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'events-resources',
+    label: 'EVENTS & RESOURCES',
+    icon: 'Target',
+    subcategories: [
+      {
+        title: 'THE ARENA',
+        items: [
+          { id: SectionId.ARENA, label: 'Arena', description: 'Events, CTFs, Competitions' }
+        ]
+      },
+      {
+        title: 'INTEL',
+        items: [
+          { id: SectionId.RESOURCES, label: 'Resources', description: 'Articles, Research, Tools' }
+        ]
+      },
+      {
+        title: 'SHOP',
+        items: [
+          { id: SectionId.SHOP, label: 'Bookings', description: 'Training sessions, Merchandise' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'company',
+    label: 'COMPANY',
+    icon: 'Building',
+    subcategories: [
+      {
+        title: 'MAIN',
+        items: [
+          { id: SectionId.HOME, label: 'Home', description: 'Black Byt3 Main' },
+          { id: SectionId.ABOUT, label: 'About', description: 'Our story and mission' }
+        ]
+      },
+      {
+        title: 'BUSINESS',
+        items: [
+          { id: SectionId.PARTNERSHIPS, label: 'Partnerships', description: 'Strategic alliances' },
+          { id: SectionId.CAREERS, label: 'Careers', description: 'Join our team' },
+          { id: SectionId.SUPPORT, label: 'Support', description: 'Client portal and help' }
+        ]
+      },
+      {
+        title: 'INFO',
+        items: [
+          { id: SectionId.FAQ, label: 'FAQ', description: 'Common questions' },
+          { id: SectionId.CONTACT, label: 'Contact', description: 'Get in touch' },
+          { id: SectionId.LEGAL, label: 'Legal', description: 'Privacy, Terms, Legal' }
+        ]
+      }
+    ]
+  }
+];
+
 export const NAV_ITEMS = [
   { id: SectionId.HOME, label: '01_HOME' },
   { id: SectionId.ABOUT, label: '02_ABOUT' },
@@ -8,10 +98,14 @@ export const NAV_ITEMS = [
   { id: SectionId.ACADEMY, label: '05_ACADEMY' },
   { id: SectionId.ARENA, label: '06_ARENA' },
   { id: SectionId.PROJECTS, label: '07_PROJECTS' },
-  { id: SectionId.SHOP, label: '08_SHOP' },
   { id: SectionId.RESOURCES, label: '09_INTEL' },
+  { id: SectionId.SHOP, label: '08_SHOP' },
   { id: SectionId.FAQ, label: '10_FAQ' },
   { id: SectionId.CONTACT, label: '11_UPLINK' },
+  { id: SectionId.PARTNERSHIPS, label: '12_PARTNERSHIPS' },
+  { id: SectionId.CAREERS, label: '13_CAREERS' },
+  { id: SectionId.SUPPORT, label: '14_SUPPORT' },
+  { id: SectionId.LEGAL, label: '15_LEGAL' },
 ];
 
 export const HERO_CONTENT = {
@@ -62,7 +156,7 @@ export const TEAM_LIST: TeamMember[] = [
   { name: "Aqsa", role: "Threat Intel Analyst", description: "Monitoring the dark web wires. Tracking threat actors and TTPs.", clearance: "L3_INTEL", specialty: "INTEL" },
   { name: "Sanan Ali Shah", role: "Security Engineer", description: "Builder of secure pipelines. Automating defense mechanisms.", clearance: "L2_ENGINEER", specialty: "DEVSECOPS" },
   { name: "Hisbullah", role: "Junior Pentester", description: "The rising shadow. Specializing in web application vulnerabilities.", clearance: "L2_OPERATOR", specialty: "WEB_SEC" },
-  { name: "Waleed", role: "Wildcard", description: "Jo kay tum khud hoo. The unexpected variable in every equation.", clearance: "L?_UNKNOWN", specialty: "ANOMALY" }
+  { name: "Waleed", role: "Wildcard", description: "The", clearance: "L?_UNKNOWN", specialty: "ANOMALY" }
 ];
 
 export const SERVICES_DATA: ServiceItem[] = [

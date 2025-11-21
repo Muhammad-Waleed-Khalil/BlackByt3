@@ -152,9 +152,10 @@ const Navigation: React.FC = () => {
     setHoverCloseTimeout(categoryId);
   }, [setHoverCloseTimeout]);
 
-  // Touch device click handling
+  // Touch device click handling - fallback for devices without hover
   const handleTriggerClick = useCallback((categoryId: string) => {
     if (isTouchDevice) {
+      // Touch devices: Click to toggle menu
       if (activeDropdown === categoryId) {
         setActiveDropdown(null);
         debugLog(`Touch: Closed menu for ${categoryId}`);
@@ -162,9 +163,8 @@ const Navigation: React.FC = () => {
         setActiveDropdown(categoryId);
         debugLog(`Touch: Opened menu for ${categoryId}`);
       }
-    } else {
-      handleDropdownToggle(categoryId);
     }
+    // Desktop devices: Ignore click events, use hover only
   }, [activeDropdown, isTouchDevice]);
 
   // Focus management for accessibility

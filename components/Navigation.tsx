@@ -115,10 +115,22 @@ const Navigation: React.FC = () => {
 
   const handleTriggerEnter = useCallback((categoryId: string) => {
     debugLog(`Trigger enter for ${categoryId}`);
-    clearHoverTimeout(categoryId);
+
+    // Close any currently open dropdown immediately when hovering to a new one
+    if (activeDropdown && activeDropdown !== categoryId) {
+      setActiveDropdown(null);
+      debugLog(`Immediately closed ${activeDropdown} when hovering to ${categoryId}`);
+    }
+
+    // Clear ALL existing timeouts to prevent conflicts
+    Object.keys(closeTimeouts).forEach(timeoutKey => {
+      clearHoverTimeout(timeoutKey);
+    });
+
+    // Open the new menu
     setHoverStates(prev => ({ ...prev, [categoryId]: true }));
     setActiveDropdown(categoryId);
-  }, [clearHoverTimeout, setHoverCloseTimeout]);
+  }, [activeDropdown, clearHoverTimeout, closeTimeouts]);
 
   const handleTriggerLeave = useCallback((categoryId: string) => {
     debugLog(`Trigger leave for ${categoryId}`);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Briefcase, Target, Building } from 'lucide-react';
 import { MEGA_MENU_CATEGORIES } from '../constants';
 
@@ -46,8 +46,7 @@ const Navigation: React.FC = () => {
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const menuRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const bridgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  
-  const navigate = useNavigate();
+
   const location = useLocation();
   
   // Detect touch device for fallback behavior
@@ -221,10 +220,16 @@ const Navigation: React.FC = () => {
   }, [activeDropdown]);
 
   const handleNavigation = (path: string) => {
-    navigate(path);
+    // First close the dropdowns
     setActiveDropdown(null);
     setIsMobileMenuOpen(false);
-    debugLog(`Navigated to ${path} and closed menu`);
+
+    // Use timeout to ensure dropdown is closed before navigation
+    setTimeout(() => {
+      // Use window.location.href for reliable navigation
+      window.location.href = `/${path}`;
+      debugLog(`Navigated to ${path} and closed menu`);
+    }, 10);
   };
 
   const handleDropdownToggle = (categoryId: string) => {

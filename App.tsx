@@ -4,7 +4,6 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import Scene3D from './components/Scene3D';
 import Terminal from './components/Terminal';
 import Navigation from './components/Navigation';
-import CustomCursor from './components/CustomCursor';
 import LoginModal from './components/LoginModal';
 import LegalTerminal from './components/LegalTerminal';
 import PageTransition from './components/PageTransition';
@@ -87,6 +86,18 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
+    // Check if user has already seen the boot sequence this session
+    const hasBooted = sessionStorage.getItem('blackbt3_booted');
+
+    if (hasBooted === 'true') {
+      // Skip boot sequence for returning visitors
+      setIsBooting(false);
+      return;
+    }
+
+    // Mark that user has seen the boot sequence
+    sessionStorage.setItem('blackbt3_booted', 'true');
+
     const lines = [
       "INITIALIZING BLACK_BYT3 KERNEL...",
       "LOADING NEURAL SHADERS...",
@@ -95,7 +106,7 @@ const App: React.FC = () => {
       "ESTABLISHING SECURE UPLINK...",
       "ACCESS GRANTED."
     ];
-    
+
     let delay = 0;
     lines.forEach((line, index) => {
       setTimeout(() => {
@@ -110,7 +121,7 @@ const App: React.FC = () => {
       }, delay);
       delay += Math.random() * 400 + 200;
     });
-  }, []);
+  }, [playTyping, playSuccess]);
 
   const openModal = (type: ModalType) => {
     setAppState(prev => ({ ...prev, activeModal: type }));

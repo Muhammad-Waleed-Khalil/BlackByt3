@@ -9,8 +9,8 @@ interface TerminalProps {
 }
 
 const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSfx }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<Command[]>([
     { type: 'system', input: '', output: 'Black Byt3 Terminal [Version 2.0.5]' },

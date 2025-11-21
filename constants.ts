@@ -148,6 +148,13 @@ export const TEAM_LIST: TeamMember[] = [
   { name: "Muhammad Waqar", role: "Founder / Lead Architect", description: "The architect of the Cyber Space. Orchestrating offensive operations and strategic defense.", clearance: "L5_ADMIN", specialty: "ARCHITECT" },
   { name: "Muhammad Jawad", role: "Head of Operations", description: "Ensuring swift execution of all tactical engagements. Master of logistics.", clearance: "L4_COMMAND", specialty: "OPS_LEAD" },
   { name: "Shamir Khan", role: "Lead Penetration Tester", description: "Breaching secure perimeters before breakfast. Network infrastructure exploitation.", clearance: "L4_OFFENSIVE", specialty: "BREACHER" },
+   { 
+    name: "Muhammad Waleed", 
+    role: "The Stack Singularity", 
+    description: "Frontend sorcerer. Backend demon. Deploys code that hacks itself for fun.", 
+    clearance: "LΩ_OMNISCIENT", 
+    specialty: "REALITY_BENDER" 
+  },
   { name: "Ammar Hanif", role: "Red Team Lead", description: "Adversary emulation specialist. Simulates APT threats to test organizational resilience.", clearance: "L4_OFFENSIVE", specialty: "RED_TEAM" },
   { name: "Saad Khan", role: "AI Security Researcher", description: "Developing autonomous defense models and adversarial ML attacks.", clearance: "L3_R&D", specialty: "AI_SEC" },
   { name: "Jafar Ali", role: "Hardware Security Lead", description: "Black Labs Director. If it has a circuit board, he can hack it.", clearance: "L4_HARDWARE", specialty: "HARDWARE" },
@@ -156,7 +163,7 @@ export const TEAM_LIST: TeamMember[] = [
   { name: "Aqsa", role: "Threat Intel Analyst", description: "Monitoring the dark web wires. Tracking threat actors and TTPs.", clearance: "L3_INTEL", specialty: "INTEL" },
   { name: "Sanan Ali Shah", role: "Security Engineer", description: "Builder of secure pipelines. Automating defense mechanisms.", clearance: "L2_ENGINEER", specialty: "DEVSECOPS" },
   { name: "Hisbullah", role: "Junior Pentester", description: "The rising shadow. Specializing in web application vulnerabilities.", clearance: "L2_OPERATOR", specialty: "WEB_SEC" },
-  { name: "Waleed", role: "Wildcard", description: "The", clearance: "L?_UNKNOWN", specialty: "ANOMALY" }
+   
 ];
 
 export const SERVICES_DATA: ServiceItem[] = [

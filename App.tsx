@@ -137,8 +137,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className={`bg-black text-white min-h-screen overflow-x-hidden cursor-none selection:bg-red-900 selection:text-white transition-all duration-1000 ${appState.isRedpill ? 'contrast-125 brightness-125' : ''}`}>
-        <CustomCursor />
+      <div className={`bg-black text-white min-h-screen overflow-x-hidden selection:bg-red-900 selection:text-white ${appState.isRedpill ? 'contrast-125 brightness-125' : ''}`}>
         <Scene3D isRedpill={appState.isRedpill} />
         <Navigation />
         

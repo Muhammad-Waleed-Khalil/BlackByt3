@@ -15,13 +15,19 @@ const CustomCursor: React.FC = () => {
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      
+
       // Check what we are hovering over
       const target = e.target as HTMLElement;
-      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
-        setCursorVariant('hover');
-      } else if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+      const clickableElements = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'];
+
+      // Check if element is clickable or has interactive parent
+      const isClickable = target.closest(clickableElements.join(', ')) ||
+                         clickableElements.includes(target.tagName);
+
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
         setCursorVariant('text');
+      } else if (isClickable) {
+        setCursorVariant('hover');
       } else {
         setCursorVariant('default');
       }
@@ -50,13 +56,21 @@ const CustomCursor: React.FC = () => {
       {/* Crosshair Lines (Only show when not hovering text) */}
       {cursorVariant !== 'text' && (
         <>
-           <motion.div 
+           <motion.div
              className="fixed top-0 left-0 h-full w-[1px] bg-red-600/20 pointer-events-none z-[9990]"
-             style={{ x: cursorX }}
+             style={{
+               x: cursorX,
+               translateX: '-50%',
+               translateY: '-50%'
+             }}
            />
-           <motion.div 
+           <motion.div
              className="fixed top-0 left-0 w-full h-[1px] bg-red-600/20 pointer-events-none z-[9990]"
-             style={{ y: cursorY }}
+             style={{
+               y: cursorY,
+               translateX: '-50%',
+               translateY: '-50%'
+             }}
            />
         </>
       )}

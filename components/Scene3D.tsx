@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, memo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Text, PerspectiveCamera, Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -195,7 +195,7 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
   );
 };
 
-const Scene3D: React.FC<SceneProps> = ({ isRedpill }) => {
+const Scene3D: React.FC<SceneProps> = memo(({ isRedpill }) => {
   return (
     <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-1000">
       <Canvas>
@@ -203,12 +203,14 @@ const Scene3D: React.FC<SceneProps> = ({ isRedpill }) => {
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} color="#ff0000" intensity={isRedpill ? 5 : 2} />
         <pointLight position={[-10, -10, -10]} color="#ff0000" intensity={1} />
-        
+
         <Background isRedpill={isRedpill} />
         <Monolith isRedpill={isRedpill} />
       </Canvas>
     </div>
   );
-};
+});
+
+Scene3D.displayName = 'Scene3D';
 
 export default Scene3D;

@@ -3,6 +3,36 @@ import { SectionId, ServiceItem, TeamMember, ProjectCaseStudy, ShopItem, FaqItem
 // Mega Menu Navigation Structure
 export const MEGA_MENU_CATEGORIES = [
   {
+    id: 'company',
+    label: 'COMPANY',
+    icon: 'Building',
+    subcategories: [
+      {
+        title: 'MAIN',
+        items: [
+          { id: SectionId.HOME, label: 'Home', description: 'Black Byt3 Main' },
+          { id: SectionId.ABOUT, label: 'About', description: 'Our story and mission' }
+        ]
+      },
+      {
+        title: 'BUSINESS',
+        items: [
+          { id: SectionId.PARTNERSHIPS, label: 'Partnerships', description: 'Strategic alliances' },
+          { id: SectionId.CAREERS, label: 'Careers', description: 'Join our team' },
+          { id: SectionId.SUPPORT, label: 'Support', description: 'Client portal and help' }
+        ]
+      },
+      {
+        title: 'INFO',
+        items: [
+          { id: SectionId.FAQ, label: 'FAQ', description: 'Common questions' },
+          { id: SectionId.CONTACT, label: 'Contact', description: 'Get in touch' },
+          { id: SectionId.LEGAL, label: 'Legal', description: 'Privacy, Terms, Legal' }
+        ]
+      }
+    ]
+  },
+  {
     id: 'solutions',
     label: 'SOLUTIONS',
     icon: 'Briefcase',
@@ -39,45 +69,10 @@ export const MEGA_MENU_CATEGORIES = [
     icon: 'Target',
     subcategories: [
       {
-        title: 'THE ARENA',
+        title: 'EVENTS & BOOKINGS',
         items: [
-          { id: SectionId.ARENA, label: 'Arena', description: 'Events, CTFs, Competitions' }
-        ]
-      },
-      {
-        title: 'SHOP',
-        items: [
-          { id: SectionId.SHOP, label: 'Bookings', description: 'Training sessions, Merchandise' }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'company',
-    label: 'COMPANY',
-    icon: 'Building',
-    subcategories: [
-      {
-        title: 'MAIN',
-        items: [
-          { id: SectionId.HOME, label: 'Home', description: 'Black Byt3 Main' },
-          { id: SectionId.ABOUT, label: 'About', description: 'Our story and mission' }
-        ]
-      },
-      {
-        title: 'BUSINESS',
-        items: [
-          { id: SectionId.PARTNERSHIPS, label: 'Partnerships', description: 'Strategic alliances' },
-          { id: SectionId.CAREERS, label: 'Careers', description: 'Join our team' },
-          { id: SectionId.SUPPORT, label: 'Support', description: 'Client portal and help' }
-        ]
-      },
-      {
-        title: 'INFO',
-        items: [
-          { id: SectionId.FAQ, label: 'FAQ', description: 'Common questions' },
-          { id: SectionId.CONTACT, label: 'Contact', description: 'Get in touch' },
-          { id: SectionId.LEGAL, label: 'Legal', description: 'Privacy, Terms, Legal' }
+          { id: SectionId.ARENA, label: 'Arena', description: 'Events, CTFs, Competitions' },
+          { id: SectionId.SHOP, label: 'Shop', description: 'Training sessions, Merchandise' }
         ]
       }
     ]

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { Command, SectionId } from '../types';
 import { Terminal as TerminalIcon, X, Minimize2, Maximize2 } from 'lucide-react';
 
@@ -8,7 +8,7 @@ interface TerminalProps {
   playSfx: (type: 'type' | 'error' | 'success') => void;
 }
 
-const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSfx }) => {
+const Terminal: React.FC<TerminalProps> = memo(({ onNavigate, onToggleRedpill, playSfx }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true);
   const [input, setInput] = useState('');
@@ -124,9 +124,7 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSf
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setInput(newValue);
-    if (newValue.length > input.length) {
-      playSfx('type');
-    }
+    // Removed audio feedback on typing for better performance
   };
 
   const focusInput = () => {
@@ -229,6 +227,8 @@ const Terminal: React.FC<TerminalProps> = ({ onNavigate, onToggleRedpill, playSf
       )}
     </div>
   );
-};
+});
+
+Terminal.displayName = 'Terminal';
 
 export default Terminal;

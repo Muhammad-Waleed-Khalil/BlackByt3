@@ -1,6 +1,7 @@
 import React from 'react';
 import { ACADEMY_CONTENT } from '../constants';
 import { Lock, ChevronRight, BookOpen, Award, Users } from 'lucide-react';
+import CertificateValidation from '../components/CertificateValidation';
 
 const AcademyPage: React.FC = () => {
   const courses = [
@@ -181,6 +182,9 @@ const AcademyPage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Certificate Validation Section */}
+        <CertificateValidation />
       </div>
     </div>
   );

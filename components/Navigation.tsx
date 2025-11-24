@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, Briefcase, Target, Building } from 'lucide-react';
 import { MEGA_MENU_CATEGORIES } from '../constants';
@@ -21,10 +21,6 @@ interface MegaMenuCategory {
   subcategories: SubCategory[];
 }
 
-// Hover timing constants
-const HOVER_OPEN_DELAY = 0; // Instant open
-const HOVER_CLOSE_DELAY = 200; // 200ms delay before closing
-
 // Debug logging function
 const debugLog = (message: string, data?: any) => {
   if (process.env.NODE_ENV === 'development') {
@@ -38,27 +34,14 @@ const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Robust hover management
-  const [hoverStates, setHoverStates] = useState<Record<string, boolean>>({});
-  const [closeTimeouts, setCloseTimeouts] = useState<Record<string, NodeJS.Timeout>>({});
-
   // Refs for DOM elements
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const menuRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  const bridgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const location = useLocation();
   const navigate = useNavigate();
-  
-  // Detect touch device for fallback behavior
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  
+
   useEffect(() => {
-    const checkTouchDevice = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    };
-    checkTouchDevice();
-    
     // Keyboard event handling
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && activeDropdown) {
@@ -66,7 +49,7 @@ const Navigation: React.FC = () => {
         debugLog('Menu closed via Escape key');
       }
     };
-    
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [activeDropdown]);
@@ -86,121 +69,17 @@ const Navigation: React.FC = () => {
     }
   };
 
-  // Robust hover management functions
-  const clearHoverTimeout = useCallback((categoryId: string) => {
-    const timeout = closeTimeouts[categoryId];
-    if (timeout) {
-      clearTimeout(timeout);
-      setCloseTimeouts(prev => {
-        const newTimeouts = { ...prev };
-        delete newTimeouts[categoryId];
-        return newTimeouts;
-      });
-      debugLog(`Cleared timeout for ${categoryId}`);
-    }
-  }, [closeTimeouts]);
-
-  const setHoverCloseTimeout = useCallback((categoryId: string) => {
-    clearHoverTimeout(categoryId);
-    const timeout = setTimeout(() => {
-      setActiveDropdown(null);
-      debugLog(`Auto-closed menu for ${categoryId} after timeout`);
-    }, HOVER_CLOSE_DELAY);
-    
-    setCloseTimeouts(prev => ({
-      ...prev,
-      [categoryId]: timeout
-    }));
-    debugLog(`Set close timeout for ${categoryId} (${HOVER_CLOSE_DELAY}ms)`);
-  }, [clearHoverTimeout]);
-
-  const handleTriggerEnter = useCallback((categoryId: string) => {
-    debugLog(`Trigger enter for ${categoryId}`);
-
-    // Close any currently open dropdown immediately when hovering to a new one
-    if (activeDropdown && activeDropdown !== categoryId) {
-      setActiveDropdown(null);
-      debugLog(`Immediately closed ${activeDropdown} when hovering to ${categoryId}`);
-    }
-
-    // Clear ALL existing timeouts to prevent conflicts
-    Object.keys(closeTimeouts).forEach(timeoutKey => {
-      clearHoverTimeout(timeoutKey);
-    });
-
-    // Open the new menu
-    setHoverStates(prev => ({ ...prev, [categoryId]: true }));
-    setActiveDropdown(categoryId);
-  }, [activeDropdown, clearHoverTimeout, closeTimeouts]);
-
-  const handleTriggerLeave = useCallback((categoryId: string) => {
-    debugLog(`Trigger leave for ${categoryId}`);
-    setHoverStates(prev => ({ ...prev, [categoryId]: false }));
-    setHoverCloseTimeout(categoryId);
-  }, [setHoverCloseTimeout]);
-
-  const handleMenuEnter = useCallback((categoryId: string) => {
-    debugLog(`Menu enter for ${categoryId}`);
-    clearHoverTimeout(categoryId);
-    setHoverStates(prev => ({ ...prev, [`${categoryId}-menu`]: true }));
-    setActiveDropdown(categoryId);
-  }, [clearHoverTimeout]);
-
-  const handleMenuLeave = useCallback((categoryId: string) => {
-    debugLog(`Menu leave for ${categoryId}`);
-    setHoverStates(prev => ({ ...prev, [`${categoryId}-menu`]: false }));
-    setHoverCloseTimeout(categoryId);
-  }, [setHoverCloseTimeout]);
-
-  const handleBridgeEnter = useCallback((categoryId: string) => {
-    debugLog(`Bridge enter for ${categoryId}`);
-    clearHoverTimeout(categoryId);
-    setHoverStates(prev => ({ ...prev, [`${categoryId}-bridge`]: true }));
-    setActiveDropdown(categoryId);
-  }, [clearHoverTimeout]);
-
-  const handleBridgeLeave = useCallback((categoryId: string) => {
-    debugLog(`Bridge leave for ${categoryId}`);
-    setHoverStates(prev => ({ ...prev, [`${categoryId}-bridge`]: false }));
-    setHoverCloseTimeout(categoryId);
-  }, [setHoverCloseTimeout]);
-
-  // Touch device click handling - fallback for devices without hover
+  // Click handling for menu toggle - works for all devices
   const handleTriggerClick = useCallback((categoryId: string) => {
-    if (isTouchDevice) {
-      // Touch devices: Click to toggle menu
-      if (activeDropdown === categoryId) {
-        setActiveDropdown(null);
-        debugLog(`Touch: Closed menu for ${categoryId}`);
-      } else {
-        setActiveDropdown(categoryId);
-        debugLog(`Touch: Opened menu for ${categoryId}`);
-      }
+    // Toggle menu on click for all devices
+    if (activeDropdown === categoryId) {
+      setActiveDropdown(null);
+      debugLog(`Closed menu for ${categoryId} on click`);
+    } else {
+      setActiveDropdown(categoryId);
+      debugLog(`Opened menu for ${categoryId} on click`);
     }
-    // Desktop devices: Ignore click events, use hover only
-  }, [activeDropdown, isTouchDevice]);
-
-  // Focus management for accessibility
-  const handleTriggerFocus = useCallback((categoryId: string) => {
-    debugLog(`Trigger focused for ${categoryId}`);
-    setActiveDropdown(categoryId);
-  }, []);
-
-  const handleTriggerBlur = useCallback((categoryId: string) => {
-    debugLog(`Trigger blurred for ${categoryId}`);
-    // Don't auto-close on blur, wait for mouse leave or escape
-  }, []);
-
-  // Cleanup function for all timeouts and event listeners
-  useEffect(() => {
-    return () => {
-      // Clear all close timeouts on unmount
-      Object.values(closeTimeouts).forEach(timeout => {
-        clearTimeout(timeout);
-      });
-      debugLog('Cleaned up all hover timeouts on unmount');
-    };
-  }, [closeTimeouts]);
+  }, [activeDropdown]);
 
   // Handle scroll effect for navbar background
   useEffect(() => {
@@ -225,12 +104,15 @@ const Navigation: React.FC = () => {
         const target = event.target as Element;
         const currentMenu = menuRefs.current[activeDropdown];
         const currentTrigger = triggerRefs.current[activeDropdown];
-        
-        if (currentMenu && !currentMenu.contains(target) && 
-            currentTrigger && !currentTrigger.contains(target)) {
-          setActiveDropdown(null);
-          debugLog('Menu closed via outside click');
+
+        // Don't close if clicking inside menu or trigger
+        if ((currentMenu && currentMenu.contains(target)) ||
+            (currentTrigger && currentTrigger.contains(target))) {
+          return;
         }
+
+        setActiveDropdown(null);
+        debugLog('Menu closed via outside click');
       }
     };
 
@@ -239,7 +121,8 @@ const Navigation: React.FC = () => {
   }, [activeDropdown]);
 
   const handleNavigation = (path: string) => {
-    // Navigate - dropdown will close automatically via useEffect watching location.pathname
+    // Close the menu immediately when navigation happens
+    setActiveDropdown(null);
     navigate(`/${path}`);
     debugLog(`Navigated to ${path}`);
   };
@@ -276,7 +159,7 @@ const Navigation: React.FC = () => {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            
+
             {/* Logo/Brand */}
             <div className="flex-shrink-0">
               <button
@@ -295,16 +178,12 @@ const Navigation: React.FC = () => {
             <div className="hidden lg:block flex-1">
               <div className="flex items-center justify-center space-x-2">
                 {MEGA_MENU_CATEGORIES.map((category) => (
-                  <div key={category.id} className="relative group">
-                    {/* Navigation Trigger Button */}
+                  <div key={category.id} className="relative">
+                    {/* Navigation Trigger Button - Click only */}
                     <button
                       ref={(el) => { triggerRefs.current[category.id] = el; }}
-                      onMouseEnter={() => handleTriggerEnter(category.id)}
-                      onMouseLeave={() => handleTriggerLeave(category.id)}
-                      onFocus={() => handleTriggerFocus(category.id)}
-                      onBlur={() => handleTriggerBlur(category.id)}
                       onClick={() => handleTriggerClick(category.id)}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm font-mono text-gray-300 hover:text-red-500 hover:bg-red-900/20 rounded-lg transition-all duration-200 group"
+                      className="flex items-center space-x-2 px-4 py-2 text-sm font-mono text-gray-300 hover:text-red-500 hover:bg-red-900/20 rounded-lg transition-all duration-200"
                       aria-expanded={activeDropdown === category.id}
                       aria-haspopup="true"
                       aria-controls={`mega-menu-${category.id}`}
@@ -316,30 +195,18 @@ const Navigation: React.FC = () => {
                       }`} />
                     </button>
 
-                    {/* Invisible Bridge - Prevents gaps between trigger and menu */}
-                    <div
-                      ref={(el) => { bridgeRefs.current[category.id] = el; }}
-                      className="absolute top-full left-0 right-0 h-3 z-10"
-                      onMouseEnter={() => handleBridgeEnter(category.id)}
-                      onMouseLeave={() => handleBridgeLeave(category.id)}
-                      style={{ pointerEvents: 'auto' }}
-                      aria-hidden="true"
-                    />
-
-                    {/* Mega Menu Dropdown */}
+                    {/* Mega Menu Dropdown - Click to toggle only */}
                     {activeDropdown === category.id && (
                       <div
                         ref={(el) => { menuRefs.current[category.id] = el; }}
                         id={`mega-menu-${category.id}`}
-                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 w-screen max-w-4xl bg-black/95 backdrop-blur-lg border border-red-900/50 rounded-b-2xl shadow-2xl z-20"
-                        onMouseEnter={() => handleMenuEnter(category.id)}
-                        onMouseLeave={() => handleMenuLeave(category.id)}
+                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-screen max-w-4xl bg-black/95 backdrop-blur-lg border border-red-900/50 rounded-2xl shadow-2xl z-20"
                         style={{ pointerEvents: 'auto' }}
                         role="menu"
                         aria-orientation="vertical"
                       >
                         <div className="p-6">
-                          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {category.subcategories.map((subcategory, subIndex) => (
                               <div key={subIndex} className="space-y-3">
                                 <h3 className="text-xs font-mono text-red-600 uppercase tracking-wider border-b border-red-900/30 pb-2">
@@ -350,13 +217,9 @@ const Navigation: React.FC = () => {
                                     <button
                                       key={item.id}
                                       onClick={() => handleNavigation(item.id)}
-                                      onMouseEnter={(e) => {
-                                        // Prevent rapid toggling when hovering menu items
-                                        e.stopPropagation();
-                                      }}
                                       className={`block w-full text-left p-3 rounded-lg transition-all duration-200 group ${
-                                        isActiveRoute(item.id) 
-                                          ? 'bg-red-900/30 text-red-400' 
+                                        isActiveRoute(item.id)
+                                          ? 'bg-red-900/30 text-red-400'
                                           : 'text-gray-400 hover:text-red-500 hover:bg-red-900/10'
                                       }`}
                                       role="menuitem"
@@ -404,7 +267,7 @@ const Navigation: React.FC = () => {
                     {getIconComponent(category.icon)}
                     <span>{category.label}</span>
                   </div>
-                  
+
                   <div className="ml-6 space-y-1">
                     {category.subcategories.map((subcategory, subIndex) => (
                       <div key={subIndex} className="space-y-1">
@@ -416,8 +279,8 @@ const Navigation: React.FC = () => {
                             key={item.id}
                             onClick={() => handleNavigation(item.id)}
                             className={`block w-full text-left p-2 text-sm rounded transition-colors ${
-                              isActiveRoute(item.id) 
-                                ? 'text-red-400 bg-red-900/20' 
+                              isActiveRoute(item.id)
+                                ? 'text-red-400 bg-red-900/20'
                                 : 'text-gray-400 hover:text-red-500 hover:bg-red-900/10'
                             }`}
                           >
@@ -441,16 +304,9 @@ const Navigation: React.FC = () => {
         </div>
       </div>
 
-      {/* Scroll Progress Indicator */}
-      <div className="fixed top-16 right-4 z-40">
-        <div className="bg-black/80 backdrop-blur-sm border border-red-900/50 rounded-lg px-3 py-2">
-          <div className="text-red-600 font-mono text-xs tracking-wider">
-            SCROLL_PROGRESS: {Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100)}%
-          </div>
-        </div>
-      </div>
+      {/* Scroll Progress Indicator removed for performance */}
     </>
   );
 };
 
-export default Navigation;
+export default memo(Navigation);

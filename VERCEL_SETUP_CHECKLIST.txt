@@ -1,0 +1,98 @@
+╔══════════════════════════════════════════════════════════════╗
+║           🚀 VERCEL DEPLOYMENT CHECKLIST                    ║
+║           Black Byt3 Contact Form                            ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 STEP-BY-STEP SETUP:
+
+1️⃣  VERIFY FILES ARE COMMITTED TO GIT
+   [ ] api/contact.js exists
+   [ ] vercel.json updated
+   [ ] pages/ContactPage.tsx updated
+   [ ] All changes committed: git add . && git commit -m "Add Vercel SMTP"
+   [ ] Push to repository: git push origin main
+
+2️⃣  GO TO VERCEL DASHBOARD
+   → https://vercel.com/dashboard
+
+3️⃣  ADD ENVIRONMENT VARIABLES
+   Go to: Your Project → Settings → Environment Variables
+   
+   Add these 6 variables:
+   
+   Name: SMTP_HOST
+   Value: smtp.blackbyt3.net
+   Environment: ✓ Production ✓ Preview ✓ Development
+   
+   Name: SMTP_PORT
+   Value: 465
+   Environment: ✓ Production ✓ Preview ✓ Development
+   
+   Name: SMTP_USER
+   Value: admin@blackbyt3.net
+   Environment: ✓ Production ✓ Preview ✓ Development
+   
+   Name: SMTP_PASS
+   Value: B74ckbyt3.4dm1n#
+   Environment: ✓ Production ✓ Preview ✓ Development
+   ⚠️  Check "Encrypt" box!
+   
+   Name: SMTP_FROM
+   Value: admin@blackbyt3.net
+   Environment: ✓ Production ✓ Preview ✓ Development
+   
+   Name: SMTP_TO
+   Value: admin@blackbyt3.net
+   Environment: ✓ Production ✓ Preview ✓ Development
+
+4️⃣  REDEPLOY PROJECT
+   [ ] Go to: Deployments tab
+   [ ] Click on latest deployment
+   [ ] Click ⋯ menu
+   [ ] Click "Redeploy"
+   [ ] Wait ~2 minutes for deployment
+
+5️⃣  TEST DEPLOYMENT
+   [ ] Visit: https://your-site.vercel.app/api/contact
+       Should show: {"success":false,"message":"Method not allowed"}
+       ✅ This is correct!
+   
+   [ ] Visit: https://your-site.vercel.app/contact
+   [ ] Fill out contact form
+   [ ] Click "Transmit Data"
+   [ ] See success message: "Message transmitted successfully!"
+   [ ] Check email: admin@blackbyt3.net
+
+6️⃣  CHECK VERCEL LOGS (if issues occur)
+   [ ] Go to: Functions tab
+   [ ] Click: /api/contact
+   [ ] View execution logs
+
+═══════════════════════════════════════════════════════════════
+
+✅ VERIFICATION:
+
+Your contact form is working if:
+✓ Form submits without errors
+✓ Success message appears
+✓ Email arrives at admin@blackbyt3.net
+✓ Email contains all form fields
+✓ Reply-to is set to customer's email
+
+═══════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION:
+
+For detailed help, see:
+- VERCEL_DEPLOYMENT.md (complete Vercel guide)
+- CONTACT_FORM_README.md (overview)
+- SMTP_SETUP.md (local development)
+
+═══════════════════════════════════════════════════════════════
+
+🎯 YOUR SITE IS READY!
+
+Local dev: npm run dev:all
+Production: Automatic deploy on git push
+
+═══════════════════════════════════════════════════════════════

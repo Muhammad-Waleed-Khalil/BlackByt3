@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { SERVICES_DATA } from '../constants';
-import { Send, Upload, Clock, DollarSign } from 'lucide-react';
+import { Send, Upload, Clock, DollarSign, Loader2, CheckCircle, XCircle } from 'lucide-react';
 
-const ContactPage: React.FC = () => {
+const ContactPage: React.FC = memo(() => {
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -15,38 +15,104 @@ const ContactPage: React.FC = () => {
     file: null as File | null
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
+
+  const handleFileUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       file: file
-    });
-  };
+    }));
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    alert('Message transmitted successfully! We will respond within 24 hours.');
-    // Reset form
-    setFormData({
-      name: '',
-      company: '',
-      email: '',
-      phone: '',
-      service: '',
-      budget: '',
-      contactTime: '',
-      message: '',
-      file: null
-    });
-  };
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      // Create FormData for file upload support
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('company', formData.company);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('service', formData.service);
+      formDataToSend.append('budget', formData.budget);
+      formDataToSend.append('contactTime', formData.contactTime);
+      formDataToSend.append('message', formData.message);
+
+      if (formData.file) {
+        formDataToSend.append('file', formData.file);
+      }
+
+      // Determine API endpoint based on environment
+      const apiUrl = process.env.NODE_ENV === 'production' || window.location.hostname !== 'localhost'
+        ? '/api/contact' // Vercel serverless function
+        : 'http://localhost:3001/api/contact'; // Local Express server
+
+      // Send to API endpoint
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message || 'Message transmitted successfully! We will respond within 24 hours.'
+        });
+
+        // Reset form on success
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: '',
+          service: '',
+          budget: '',
+          contactTime: '',
+          message: '',
+          file: null
+        });
+
+        // Clear file input
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput) fileInput.value = '';
+
+        // Auto-clear success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus({ type: null, message: '' });
+        }, 5000);
+
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Connection error. Please ensure the API server is running or contact us directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData]);
 
   return (
     <div className="min-h-screen py-20 px-6">
@@ -194,13 +260,45 @@ const ContactPage: React.FC = () => {
                 </div>
               </div>
               
-              <button 
+              {/* Status Message */}
+              {submitStatus.type && (
+                <div className={`p-4 rounded border ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-900/20 border-green-600/50'
+                    : 'bg-red-900/20 border-red-600/50'
+                }`}>
+                  <div className="flex items-center gap-3">
+                    {submitStatus.type === 'success' ? (
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    ) : (
+                      <XCircle className="w-5 h-5 text-red-400" />
+                    )}
+                    <p className={`font-mono text-sm ${
+                      submitStatus.type === 'success' ? 'text-green-400' : 'text-red-400'
+                    }`}>
+                      {submitStatus.message}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <button
                 type="submit"
-                className="w-full bg-white text-black font-bold font-mono py-4 uppercase tracking-[0.2em] hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-4 group"
+                disabled={isSubmitting}
+                className="w-full bg-white text-black font-bold font-mono py-4 uppercase tracking-[0.2em] hover:bg-red-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-4 group disabled:bg-gray-600 disabled:cursor-not-allowed disabled:hover:text-white"
               >
-                <Send className="w-4 h-4" />
-                <span>Transmit Data</span>
-                <div className="w-2 h-2 bg-red-600 group-hover:bg-white rounded-full animate-pulse" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Transmitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Transmit Data</span>
+                    <div className="w-2 h-2 bg-red-600 group-hover:bg-white rounded-full animate-pulse" />
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -277,6 +375,8 @@ const ContactPage: React.FC = () => {
       </div>
     </div>
   );
-};
+});
+
+ContactPage.displayName = 'ContactPage';
 
 export default ContactPage;

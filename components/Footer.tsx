@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Linkedin,
@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { MEGA_MENU_CATEGORIES } from '../constants';
 
-const Footer: React.FC = () => {
+const Footer: React.FC = memo(() => {
     return (
         <footer className="bg-black border-t border-red-900/30 pt-20 pb-10 relative z-20 pointer-events-auto">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -129,6 +129,8 @@ const Footer: React.FC = () => {
             </div>
         </footer>
     );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

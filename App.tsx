@@ -99,19 +99,26 @@ const AppContent: React.FC = () => {
     navigate(`/${section}`);
   };
 
+  // Disable Scene3D on contact page for better input performance
+  const isContactPage = location.pathname === '/contact';
+
   return (
     <div className={`bg-black text-white min-h-screen overflow-x-hidden selection:bg-red-900 selection:text-white ${appState.isRedpill ? 'contrast-125 brightness-125' : ''}`}>
-      <Scene3D isRedpill={appState.isRedpill} />
+      {!isContactPage && <Scene3D isRedpill={appState.isRedpill} />}
       <Navigation />
 
-      {/* Global Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-red-600 z-50 origin-left"
-        style={{ scaleX }}
-      />
-      <div className="fixed top-2 right-4 z-50 text-[10px] font-mono text-red-600 bg-black px-2 border border-red-900">
-        BREACH_PROGRESS
-      </div>
+      {/* Global Progress Bar - Disabled on contact page for performance */}
+      {!isContactPage && (
+        <>
+          <motion.div
+            className="fixed top-0 left-0 right-0 h-1 bg-red-600 z-50 origin-left"
+            style={{ scaleX }}
+          />
+          <div className="fixed top-2 right-4 z-50 text-[10px] font-mono text-red-600 bg-black px-2 border border-red-900">
+            BREACH_PROGRESS
+          </div>
+        </>
+      )}
 
       {/* Modals */}
       <LoginModal isOpen={appState.activeModal === 'LOGIN'} onClose={closeModal} />
@@ -122,7 +129,7 @@ const AppContent: React.FC = () => {
       />
 
       <main className="relative z-10 pt-24 pointer-events-auto">
-        <Routes key={location.pathname}>
+        <Routes>
           <Route path="/" element={<PageTransition><HomePage onNavigate={handleNavigate} /></PageTransition>} />
           <Route path="/home" element={<PageTransition><HomePage onNavigate={handleNavigate} /></PageTransition>} />
           <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />

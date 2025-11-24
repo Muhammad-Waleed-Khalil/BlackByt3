@@ -1,5 +1,5 @@
 import React from 'react';
-import { ABOUT_CONTENT, TEAM_LIST } from '../constants';
+import { ABOUT_CONTENT, TEAM_LIST, CTF_LIST } from '../constants';
 import TeamGrid from '../components/TeamGrid';
 import { Target } from 'lucide-react';
 
@@ -43,11 +43,17 @@ const AboutPage: React.FC<AboutPageProps> = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Team Grid */}
         <div>
           <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">Active Operators</h4>
           <TeamGrid members={TEAM_LIST} />
+        </div>
+
+        {/* CTF Grid */}
+        <div>
+          <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">CTF Players</h4>
+          <TeamGrid members={CTF_LIST} />
         </div>
       </div>
     </div>

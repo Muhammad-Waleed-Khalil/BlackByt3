@@ -15,7 +15,7 @@ const AcademyPage: React.FC = () => {
     {
       title: "Machine Learning Certified - A Hacker Way",
       description: "AI/ML security from an offensive perspective.",
-      duration: "8 weeks", 
+      duration: "8 weeks",
       level: "Advanced",
       price: "$399",
       highlights: ["Adversarial ML", "Custom models", "Security applications"]
@@ -56,13 +56,13 @@ const AcademyPage: React.FC = () => {
               </div>
             ))}
           </div>
-          
+
           {/* Featured Course */}
           <div className="bg-red-900/5 border border-red-900/30 p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:bg-red-950/10 transition-all">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
              <h3 className="text-2xl font-['Unica_One'] text-white mb-2 z-10 group-hover:text-red-500 transition-colors">PRACTICAL AWS CERTIFIED</h3>
              <p className="text-gray-300 font-mono text-xs mb-6 z-10">
-                Deployment-ready cloud security skills. No theory, just war stories. 
+                Deployment-ready cloud security skills. No theory, just war stories.
                 Learn to secure EC2, S3, IAM, and Lambda in hostile environments.
              </p>
              <button className="bg-red-600 text-black font-mono font-bold uppercase text-xs px-6 py-3 hover:bg-white transition-colors z-10">
@@ -116,62 +116,69 @@ const AcademyPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Certifications */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-black/60 border border-gray-700 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Award className="w-6 h-6 text-red-600" />
-              <h3 className="text-2xl font-['Unica_One'] text-white">Black Byt3 Certifications</h3>
-            </div>
-            <div className="space-y-4">
-              <div className="border-l-2 border-red-600 pl-4">
-                <h4 className="text-red-500 font-mono text-sm mb-2">Practical AWS Certified</h4>
-                <p className="text-gray-300 text-sm font-mono">
-                  Hands-on AWS security assessment and hardening skills.
-                </p>
-              </div>
-              <div className="border-l-2 border-red-600 pl-4">
-                <h4 className="text-red-500 font-mono text-sm mb-2">Machine Learning Certified</h4>
-                <p className="text-gray-300 text-sm font-mono">
-                  AI/ML security applications and adversarial techniques.
-                </p>
-              </div>
-              <div className="border-l-2 border-red-600 pl-4">
-                <h4 className="text-red-500 font-mono text-sm mb-2">Cyber Security Mastery</h4>
-                <p className="text-gray-300 text-sm font-mono">
-                  Comprehensive cybersecurity skill validation.
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* Black Hol3 Section */}
+        <div className="mb-16">
+          <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+            Black Hol3
+          </h3>
 
-          <div className="bg-red-900/5 border border-red-900/30 p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Users className="w-6 h-6 text-red-600" />
-              <h3 className="text-2xl font-['Unica_One'] text-white">OCMP Program</h3>
+          {/* Certifications */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="bg-black/60 border border-gray-700 p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Award className="w-6 h-6 text-red-600" />
+                <h4 className="text-2xl font-['Unica_One'] text-white">Black Byt3 Certifications</h4>
+              </div>
+              <div className="space-y-4">
+                <div className="border-l-2 border-red-600 pl-4">
+                  <h5 className="text-red-500 font-mono text-sm mb-2">BCOP - Black Byt3 Certified Offensive Practitioner</h5>
+                  <p className="text-gray-300 text-sm font-mono">
+                    Advanced offensive security skills and penetration testing mastery.
+                  </p>
+                </div>
+                <div className="border-l-2 border-red-600 pl-4">
+                  <h5 className="text-red-500 font-mono text-sm mb-2">BCAP - Black Byt3 Certified AWS Practitioner</h5>
+                  <p className="text-gray-300 text-sm font-mono">
+                    Hands-on AWS security assessment and hardening skills.
+                  </p>
+                </div>
+                <div className="border-l-2 border-red-600 pl-4">
+                  <h5 className="text-red-500 font-mono text-sm mb-2">MLCert - The Hacker's Approach to Machine Learning</h5>
+                  <p className="text-gray-300 text-sm font-mono">
+                    AI/ML security applications and adversarial techniques from an offensive perspective.
+                  </p>
+                </div>
+              </div>
             </div>
-            <p className="text-gray-300 font-mono text-sm mb-4">
-              One-to-One Cyber Mentor Program provides personalized cybersecurity education, 
-              hands-on experience, and career guidance tailored to individual goals.
-            </p>
-            <ul className="space-y-2 text-sm font-mono text-gray-300">
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-red-600"></span>
-                Personalized learning roadmap
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-red-600"></span>
-                Live hands-on labs
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-red-600"></span>
-                Industry expert mentorship
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-red-600"></span>
-                Career development support
-              </li>
-            </ul>
+
+            <div className="bg-red-900/5 border border-red-900/30 p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Users className="w-6 h-6 text-red-600" />
+                <h3 className="text-2xl font-['Unica_One'] text-white">OCMP Program</h3>
+              </div>
+              <p className="text-gray-300 font-mono text-sm mb-4">
+                One-to-One Cyber Mentor Program provides personalized cybersecurity education,
+                hands-on experience, and career guidance tailored to individual goals.
+              </p>
+              <ul className="space-y-2 text-sm font-mono text-gray-300">
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-red-600"></span>
+                  Personalized learning roadmap
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-red-600"></span>
+                  Live hands-on labs
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-red-600"></span>
+                  Industry expert mentorship
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-red-600"></span>
+                  Career development support
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

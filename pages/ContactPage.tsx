@@ -69,7 +69,23 @@ const ContactPage: React.FC = memo(() => {
         body: formDataToSend
       });
 
-      const data = await response.json();
+      // Try to parse JSON response, fallback to text if it fails
+      let data;
+      const contentType = response.headers.get('content-type');
+
+      try {
+        if (contentType && contentType.includes('application/json')) {
+          data = await response.json();
+        } else {
+          const text = await response.text();
+          // If server returns plain text, wrap it in an object
+          data = { success: false, message: text };
+        }
+      } catch (parseError) {
+        // If JSON parsing fails, treat as error
+        const text = await response.text().catch(() => 'Unknown error occurred');
+        data = { success: false, message: text };
+      }
 
       if (response.ok && data.success) {
         setSubmitStatus({

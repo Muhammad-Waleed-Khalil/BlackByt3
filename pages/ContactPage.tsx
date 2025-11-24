@@ -212,15 +212,21 @@ const ContactPage: React.FC = () => {
               <div className="space-y-4">
                 <div>
                   <span className="text-red-900 font-mono uppercase text-xs block mb-1">Secure Email</span>
-                  <span className="text-white font-mono text-sm">contact@blackbyt3.com</span>
+                  <div className="text-white font-mono text-sm">
+                    <div>info@blackbyt3.net</div>
+                    <div>contact@blackbyt3.net</div>
+                  </div>
                 </div>
                 <div>
                   <span className="text-red-900 font-mono uppercase text-xs block mb-1">Emergency Response</span>
-                  <span className="text-white font-mono text-sm">+92-XXX-XXXXXXX</span>
+                  <div className="text-white font-mono text-sm">
+                    <div>+92 3149607607</div>
+                    <div>+12393564959</div>
+                  </div>
                 </div>
                 <div>
                   <span className="text-red-900 font-mono uppercase text-xs block mb-1">Office Location</span>
-                  <span className="text-white font-mono text-sm">Islamabad, Pakistan</span>
+                  <span className="text-white font-mono text-sm">7901 4th St N, STE 300, St. Petersburg, FL 33702, USA</span>
                 </div>
               </div>
             </div>

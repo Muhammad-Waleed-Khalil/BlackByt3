@@ -71,7 +71,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Left Column */}
             <div
-              className="lg:col-span-7 space-y-8"
+              className="lg:col-span-7 space-y-8 relative z-20"
             >
               {/* Title */}
               <div>
@@ -120,29 +120,15 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
             {/* Right Column - Stats */}
             <div
-              className="lg:col-span-5"
+              className="lg:col-span-5 flex items-center justify-center relative z-10"
             >
-              <div className="bg-gray-900/60 border border-red-600/30 backdrop-blur-sm">
-                {/* Header */}
-                <div className="bg-black/60 px-4 py-3 border-b border-red-600/30 flex items-center justify-between">
-                  <span className="text-red-400 font-mono text-sm">SYSTEM_STATUS</span>
-                  <Activity className="w-4 h-4 text-red-500 animate-pulse" />
-                </div>
-
-                {/* Stats */}
-                <div className="p-6 space-y-4">
-                  {[
-                    { label: 'THREATS_BLOCKED', value: '1,247' },
-                    { label: 'SECURITY_TESTS', value: '150+' },
-                    { label: 'CLIENTS_PROTECTED', value: '45' },
-                    { label: 'UPTIME', value: '99.8%' },
-                  ].map((metric, idx) => (
-                    <div key={idx} className="border-b border-gray-700 pb-4 last:border-0">
-                      <div className="text-gray-400 font-mono text-xs mb-1">{metric.label}</div>
-                      <div className="text-2xl font-bold text-white font-mono">{metric.value}</div>
-                    </div>
-                  ))}
-                </div>
+              <div className="w-full relative flex justify-center">
+                <div className="absolute -inset-20 bg-red-600/20 blur-3xl rounded-full opacity-20"></div>
+                <img
+                  src="/HeroSection.png"
+                  alt="Hero Section Stats"
+                  className="relative w-[200%] max-w-none h-auto object-contain -ml-[50%] translate-x-1 transform hover:scale-105 transition-transform duration-500"
+                />
               </div>
             </div>
           </div>
@@ -198,18 +184,16 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               return (
                 <div
                   key={idx}
-                  className={`border-2 p-6 cursor-pointer transition-all ${
-                    isActive ? 'border-red-600 bg-red-600/5' : 'border-gray-700 hover:border-red-600/50'
-                  }`}
+                  className={`border-2 p-6 cursor-pointer transition-all ${isActive ? 'border-red-600 bg-red-600/5' : 'border-gray-700 hover:border-red-600/50'
+                    }`}
                   onClick={() => {
                     setActiveService(idx);
                     onNavigate('services');
                   }}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className={`w-14 h-14 border flex items-center justify-center ${
-                      isActive ? 'border-red-600 bg-red-600/10' : 'border-gray-700'
-                    }`}>
+                    <div className={`w-14 h-14 border flex items-center justify-center ${isActive ? 'border-red-600 bg-red-600/10' : 'border-gray-700'
+                      }`}>
                       <IconComponent className={`w-7 h-7 ${isActive ? 'text-red-500' : 'text-gray-500'}`} />
                     </div>
                     <span className={`font-mono text-xs ${isActive ? 'text-red-400' : 'text-gray-500'}`}>

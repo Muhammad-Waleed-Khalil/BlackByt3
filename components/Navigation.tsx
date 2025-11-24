@@ -281,9 +281,13 @@ const Navigation: React.FC = () => {
             <div className="flex-shrink-0">
               <button
                 onClick={() => handleNavigation('home')}
-                className="font-['Unica_One'] text-xl text-red-600 hover:text-red-400 transition-colors tracking-wider"
+                className="transition-opacity hover:opacity-80"
               >
-                BLACK BYT3
+                <img
+                  src="/Logo.png"
+                  alt="BLACK BYT3"
+                  className="h-14 w-auto"
+                />
               </button>
             </div>
 

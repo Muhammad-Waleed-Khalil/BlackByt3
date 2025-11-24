@@ -97,18 +97,29 @@ export default async function handler(req, res) {
       });
     }
 
-    // Configure SMTP transporter
+    // Configure SMTP transporter with optimized settings for Vercel
+    const smtpPort = parseInt(process.env.SMTP_PORT || '465');
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.blackbyt3.net',
-      port: parseInt(process.env.SMTP_PORT || '465'),
-      secure: true,
+      port: smtpPort,
+      secure: smtpPort === 465, // true for 465, false for other ports
       auth: {
         user: process.env.SMTP_USER || 'admin@blackbyt3.net',
         pass: process.env.SMTP_PASS || 'B74ckbyt3.4dm1n#'
       },
+      // Optimized for serverless environment
+      pool: false, // Disable connection pooling for serverless
+      connectionTimeout: 5000, // 5 second connection timeout
+      greetingTimeout: 5000, // 5 second greeting timeout
+      socketTimeout: 5000, // 5 second socket timeout
+      // TLS configuration
       tls: {
-        rejectUnauthorized: false
-      }
+        rejectUnauthorized: false,
+        minVersion: 'TLSv1.2'
+      },
+      // Debug logging (can be disabled in production)
+      debug: false,
+      logger: false
     });
 
     // Email HTML template
@@ -205,8 +216,26 @@ export default async function handler(req, res) {
       }] : []
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    // Verify SMTP connection before sending
+    try {
+      await transporter.verify();
+    } catch (verifyError) {
+      console.error('SMTP verification failed:', verifyError);
+      throw new Error(`SMTP server connection failed: ${verifyError.message}`);
+    }
+
+    // Send email with timeout
+    const sendTimeout = setTimeout(() => {
+      throw new Error('Email send operation timed out');
+    }, 8000); // 8 second timeout, leaving 2 seconds for function overhead
+
+    try {
+      await transporter.sendMail(mailOptions);
+      clearTimeout(sendTimeout);
+    } catch (sendError) {
+      clearTimeout(sendTimeout);
+      throw sendError;
+    }
 
     // Return success
     return res.status(200).json({
@@ -216,10 +245,21 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Error sending email:', error);
+
+    // Provide more specific error messages
+    let userMessage = 'Failed to send message. Please try again or contact us directly.';
+    if (error.code === 'EAUTH') {
+      userMessage = 'Email service authentication failed. Please contact support.';
+    } else if (error.code === 'ETIMEDOUT' || error.code === 'ESOCKET') {
+      userMessage = 'Email service temporarily unavailable. Please try again in a moment.';
+    } else if (error.code === 'ECONNECTION') {
+      userMessage = 'Could not connect to email service. Please try again later.';
+    }
+
     return res.status(500).json({
       success: false,
-      message: 'Failed to send message. Please try again or contact us directly.',
-      error: error.message
+      message: userMessage,
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 }

@@ -197,7 +197,7 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
 
 const Scene3D: React.FC<SceneProps> = ({ isRedpill }) => {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none md:pointer-events-auto transition-all duration-1000">
+    <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-1000">
       <Canvas>
         <PerspectiveCamera makeDefault position={[0, 0, 6]} />
         <ambientLight intensity={0.5} />

@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Scene3D from './components/Scene3D';
 import Terminal from './components/Terminal';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import LoginModal from './components/LoginModal';
 import LegalTerminal from './components/LegalTerminal';
 import PageTransition from './components/PageTransition';
+import ScrollToTop from './components/ScrollToTop';
 import { ModalType } from './types';
-import { Globe, Shield, Users } from 'lucide-react';
 
 // Page Components
 import HomePage from './pages/HomePage';
@@ -56,21 +57,22 @@ const AudioEngine = () => {
       setTimeout(() => playTone(100, 'sawtooth', 0.3), 150);
     },
     playSuccess: () => {
-       playTone(1000, 'sine', 0.1);
-       setTimeout(() => playTone(2000, 'sine', 0.2), 100);
+      playTone(1000, 'sine', 0.1);
+      setTimeout(() => playTone(2000, 'sine', 0.2), 100);
     }
   };
 };
 
-const App: React.FC = () => {
-  const [isBooting, setIsBooting] = useState(true);
-  const [bootText, setBootText] = useState<string[]>([]);
+// Inner component that uses navigation
+const AppContent: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [appState, setAppState] = useState({
     isRedpill: false,
     audioEnabled: true,
     activeModal: null as ModalType
   });
-  
+
   const { playTyping, playError, playSuccess } = AudioEngine();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -84,6 +86,79 @@ const App: React.FC = () => {
     if (type === 'error') playError();
     if (type === 'success') playSuccess();
   };
+
+  const openModal = (type: ModalType) => {
+    setAppState(prev => ({ ...prev, activeModal: type }));
+  };
+
+  const closeModal = () => {
+    setAppState(prev => ({ ...prev, activeModal: null }));
+  };
+
+  const handleNavigate = (section: string) => {
+    navigate(`/${section}`);
+  };
+
+  return (
+    <div className={`bg-black text-white min-h-screen overflow-x-hidden selection:bg-red-900 selection:text-white ${appState.isRedpill ? 'contrast-125 brightness-125' : ''}`}>
+      <Scene3D isRedpill={appState.isRedpill} />
+      <Navigation />
+
+      {/* Global Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-red-600 z-50 origin-left"
+        style={{ scaleX }}
+      />
+      <div className="fixed top-2 right-4 z-50 text-[10px] font-mono text-red-600 bg-black px-2 border border-red-900">
+        BREACH_PROGRESS
+      </div>
+
+      {/* Modals */}
+      <LoginModal isOpen={appState.activeModal === 'LOGIN'} onClose={closeModal} />
+      <LegalTerminal
+        isOpen={appState.activeModal === 'LEGAL_PRIVACY' || appState.activeModal === 'LEGAL_TERMS'}
+        type={appState.activeModal === 'LEGAL_PRIVACY' ? 'PRIVACY' : 'TERMS'}
+        onClose={closeModal}
+      />
+
+      <main className="relative z-10 pt-24 pointer-events-auto">
+        <Routes key={location.pathname}>
+          <Route path="/" element={<PageTransition><HomePage onNavigate={handleNavigate} /></PageTransition>} />
+          <Route path="/home" element={<PageTransition><HomePage onNavigate={handleNavigate} /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
+          <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/solutions" element={<PageTransition><SolutionsPage /></PageTransition>} />
+          <Route path="/academy" element={<PageTransition><AcademyPage /></PageTransition>} />
+          <Route path="/arena" element={<PageTransition><ArenaPage /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
+          <Route path="/resources" element={<PageTransition><ResourcesPage /></PageTransition>} />
+          <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
+          <Route path="/faq" element={<PageTransition><FAQPage /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+          <Route path="/partnerships" element={<PageTransition><PartnershipsPage /></PageTransition>} />
+          <Route path="/careers" element={<PageTransition><CareersPage /></PageTransition>} />
+          <Route path="/support" element={<PageTransition><SupportPortalPage /></PageTransition>} />
+          <Route path="/legal" element={<PageTransition><LegalPage /></PageTransition>} />
+        </Routes>
+      </main>
+
+      {/* Global Footer */}
+      <Footer />
+
+      <Terminal
+        onNavigate={handleNavigate}
+        onToggleRedpill={() => setAppState(prev => ({ ...prev, isRedpill: !prev.isRedpill }))}
+        playSfx={handlePlaySfx}
+      />
+    </div>
+  );
+};
+
+// Main App component with boot sequence
+const App: React.FC = () => {
+  const [isBooting, setIsBooting] = useState(true);
+  const [bootText, setBootText] = useState<string[]>([]);
+  const { playTyping, playSuccess } = AudioEngine();
 
   useEffect(() => {
     // Check if user has already seen the boot sequence this session
@@ -123,14 +198,6 @@ const App: React.FC = () => {
     });
   }, [playTyping, playSuccess]);
 
-  const openModal = (type: ModalType) => {
-    setAppState(prev => ({ ...prev, activeModal: type }));
-  };
-
-  const closeModal = () => {
-    setAppState(prev => ({ ...prev, activeModal: null }));
-  };
-
   if (isBooting) {
     return (
       <div className="fixed inset-0 bg-black flex flex-col items-center justify-center font-mono text-red-600 p-8 z-[100]">
@@ -148,78 +215,8 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className={`bg-black text-white min-h-screen overflow-x-hidden selection:bg-red-900 selection:text-white ${appState.isRedpill ? 'contrast-125 brightness-125' : ''}`}>
-        <Scene3D isRedpill={appState.isRedpill} />
-        <Navigation />
-        
-        {/* Global Progress Bar */}
-        <motion.div
-          className="fixed top-0 left-0 right-0 h-1 bg-red-600 z-50 origin-left"
-          style={{ scaleX }}
-        />
-        <div className="fixed top-2 right-4 z-50 text-[10px] font-mono text-red-600 bg-black px-2 border border-red-900">
-          BREACH_PROGRESS
-        </div>
-
-        {/* Modals */}
-        <LoginModal isOpen={appState.activeModal === 'LOGIN'} onClose={closeModal} />
-        <LegalTerminal 
-          isOpen={appState.activeModal === 'LEGAL_PRIVACY' || appState.activeModal === 'LEGAL_TERMS'} 
-          type={appState.activeModal === 'LEGAL_PRIVACY' ? 'PRIVACY' : 'TERMS'} 
-          onClose={closeModal} 
-        />
-
-        <main className="relative z-10 pt-24">
-          <Routes>
-            <Route path="/" element={<PageTransition><HomePage onNavigate={(section) => window.location.href = `/${section}`} /></PageTransition>} />
-            <Route path="/home" element={<PageTransition><HomePage onNavigate={(section) => window.location.href = `/${section}`} /></PageTransition>} />
-            <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
-            <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
-            <Route path="/solutions" element={<PageTransition><SolutionsPage /></PageTransition>} />
-            <Route path="/academy" element={<PageTransition><AcademyPage /></PageTransition>} />
-            <Route path="/arena" element={<PageTransition><ArenaPage /></PageTransition>} />
-            <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
-            <Route path="/resources" element={<PageTransition><ResourcesPage /></PageTransition>} />
-            <Route path="/shop" element={<PageTransition><ShopPage /></PageTransition>} />
-            <Route path="/faq" element={<PageTransition><FAQPage /></PageTransition>} />
-            <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
-            <Route path="/partnerships" element={<PageTransition><PartnershipsPage /></PageTransition>} />
-            <Route path="/careers" element={<PageTransition><CareersPage /></PageTransition>} />
-            <Route path="/support" element={<PageTransition><SupportPortalPage /></PageTransition>} />
-            <Route path="/legal" element={<PageTransition><LegalPage /></PageTransition>} />
-          </Routes>
-        </main>
-
-        {/* Global Footer */}
-        <footer className="py-16 border-t border-red-900/30 bg-black text-center relative z-10">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="font-['Unica_One'] text-4xl text-gray-800 mb-8 tracking-widest">BLACK BYT3</h2>
-            
-            <div className="flex flex-wrap justify-center gap-8 mb-12 font-mono text-xs text-gray-500">
-              <button onClick={() => openModal('LEGAL_PRIVACY')} className="hover:text-red-600 transition-colors uppercase">[Privacy Policy]</button>
-              <button onClick={() => openModal('LEGAL_TERMS')} className="hover:text-red-600 transition-colors uppercase">[Terms of Service]</button>
-              <button className="hover:text-red-600 transition-colors uppercase">[Cookie Policy]</button>
-              <button onClick={() => openModal('LOGIN')} className="hover:text-red-600 transition-colors uppercase">[Client Portal]</button>
-            </div>
-            
-            <div className="flex justify-center gap-8 text-gray-700 mb-8">
-              <Globe className="w-6 h-6 hover:text-red-600 cursor-pointer transition-colors" />
-              <Shield className="w-6 h-6 hover:text-red-600 cursor-pointer transition-colors" />
-              <Users className="w-6 h-6 hover:text-red-600 cursor-pointer transition-colors" />
-            </div>
-            
-            <p className="text-[10px] font-mono text-gray-800">
-              SYSTEM ID: BB-2025-SECURE // UNAUTHORIZED ACCESS IS A FEDERAL OFFENSE
-            </p>
-          </div>
-        </footer>
-
-        <Terminal 
-          onNavigate={(section) => window.location.href = `/${section}`}
-          onToggleRedpill={() => setAppState(prev => ({ ...prev, isRedpill: !prev.isRedpill }))} 
-          playSfx={handlePlaySfx}
-        />
-      </div>
+      <ScrollToTop />
+      <AppContent />
     </Router>
   );
 };

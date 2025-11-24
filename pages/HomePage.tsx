@@ -75,7 +75,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             >
               {/* Title */}
               <div>
-                <h1 className="text-[100px] lg:text-[160px] font-['Unica_One'] leading-none tracking-tighter">
+                <h1 className="text-[120px] lg:text-[190px] font-['Unica_One'] leading-none tracking-tighter">
                   <span className="text-white block">BLACK</span>
                   <span className="text-red-600 block -mt-6">BYT3</span>
                 </h1>
@@ -139,7 +139,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="py-20 px-4 border-t border-gray-700">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <h2 className="text-5xl lg:text-6xl font-['Unica_One'] text-white mb-2">
+            <h2 className="text-6xl lg:text-7xl font-['Unica_One'] text-white mb-2">
               WHY <span className="text-red-600">BLACK BYT3</span>
             </h2>
             <div className="h-px w-32 bg-red-600 mt-4"></div>
@@ -170,7 +170,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="py-20 px-4 border-t border-gray-700">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <h2 className="text-5xl lg:text-6xl font-['Unica_One'] text-white mb-2">
+            <h2 className="text-6xl lg:text-7xl font-['Unica_One'] text-white mb-2">
               OUR <span className="text-red-600">SERVICES</span>
             </h2>
             <div className="h-px w-32 bg-red-600 mt-4"></div>
@@ -233,7 +233,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="py-20 px-4 border-t border-gray-700">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16">
-            <h2 className="text-5xl lg:text-6xl font-['Unica_One'] text-white mb-2">
+            <h2 className="text-6xl lg:text-7xl font-['Unica_One'] text-white mb-2">
               ELITE <span className="text-red-600">TEAM</span>
             </h2>
             <div className="h-px w-32 bg-red-600 mt-4"></div>
@@ -286,7 +286,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="py-20 px-4 border-t border-gray-700">
         <div className="max-w-6xl mx-auto">
           <div className="mb-16">
-            <h2 className="text-5xl lg:text-6xl font-['Unica_One'] text-white mb-2">
+            <h2 className="text-6xl lg:text-7xl font-['Unica_One'] text-white mb-2">
               MISSION <span className="text-red-600">ARCHIVES</span>
             </h2>
             <div className="h-px w-32 bg-red-600 mt-4"></div>
@@ -340,7 +340,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* Final CTA */}
       <section className="py-32 px-4 border-t border-gray-700">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl lg:text-6xl font-['Unica_One'] text-white mb-6 leading-tight">
+          <h2 className="text-5xl lg:text-7xl font-['Unica_One'] text-white mb-6 leading-tight">
             READY TO SECURE YOUR
             <br />
             <span className="text-red-600">DIGITAL FUTURE?</span>

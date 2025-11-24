@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, Briefcase, Target, Building } from 'lucide-react';
 import { MEGA_MENU_CATEGORIES } from '../constants';
 
@@ -37,17 +37,18 @@ const Navigation: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   // Robust hover management
   const [hoverStates, setHoverStates] = useState<Record<string, boolean>>({});
   const [closeTimeouts, setCloseTimeouts] = useState<Record<string, NodeJS.Timeout>>({});
-  
+
   // Refs for DOM elements
   const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const menuRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const bridgeRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const location = useLocation();
+  const navigate = useNavigate();
   
   // Detect touch device for fallback behavior
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -211,6 +212,12 @@ const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdown when location changes
+  useEffect(() => {
+    setActiveDropdown(null);
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   // Click outside to close menu
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -232,16 +239,9 @@ const Navigation: React.FC = () => {
   }, [activeDropdown]);
 
   const handleNavigation = (path: string) => {
-    // First close the dropdowns
-    setActiveDropdown(null);
-    setIsMobileMenuOpen(false);
-
-    // Use timeout to ensure dropdown is closed before navigation
-    setTimeout(() => {
-      // Use window.location.href for reliable navigation
-      window.location.href = `/${path}`;
-      debugLog(`Navigated to ${path} and closed menu`);
-    }, 10);
+    // Navigate - dropdown will close automatically via useEffect watching location.pathname
+    navigate(`/${path}`);
+    debugLog(`Navigated to ${path}`);
   };
 
   const handleDropdownToggle = (categoryId: string) => {

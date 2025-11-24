@@ -121,7 +121,7 @@ const CareersPage: React.FC = () => {
             <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
               13_APPLICATION
             </h2>
-            <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
+            <h1 className="text-5xl md:text-6xl font-['Unica_One'] leading-none mb-8 text-white">
               Career Application Form
             </h1>
           </div>
@@ -235,7 +235,7 @@ const CareersPage: React.FC = () => {
           <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
             13_CAREERS
           </h2>
-          <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
+          <h1 className="text-5xl md:text-6xl font-['Unica_One'] leading-none mb-8 text-white">
             Join the Cyber Resistance
           </h1>
           <p className="font-mono text-gray-300 text-lg max-w-3xl">

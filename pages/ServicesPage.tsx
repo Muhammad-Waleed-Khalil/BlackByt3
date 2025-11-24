@@ -14,7 +14,7 @@ const ServicesPage: React.FC<ServicesPageProps> = () => {
           <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
             03_SERVICES
           </h2>
-          <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
+          <h1 className="text-5xl md:text-6xl font-['Unica_One'] leading-none mb-8 text-white">
             Offensive & Defensive Capabilities
           </h1>
         </div>

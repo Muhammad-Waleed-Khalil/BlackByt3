@@ -14,7 +14,7 @@ const SupportPortalPage: React.FC = () => {
             <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
               14_SUPPORT
             </h2>
-            <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-8 text-white">
+            <h1 className="text-5xl md:text-6xl font-['Unica_One'] leading-none mb-8 text-white">
               Client Portal Access
             </h1>
             <p className="font-mono text-gray-300 text-lg max-w-3xl">
@@ -128,7 +128,7 @@ const SupportPortalPage: React.FC = () => {
               Logout
             </button>
           </div>
-          <h1 className="text-4xl md:text-5xl font-['Unica_One'] leading-none mb-4 text-white">
+          <h1 className="text-5xl md:text-6xl font-['Unica_One'] leading-none mb-4 text-white">
             Client Portal
           </h1>
           <p className="font-mono text-gray-300">

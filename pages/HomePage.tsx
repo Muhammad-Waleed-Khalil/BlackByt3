@@ -66,7 +66,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center px-4 py-20">
+      <section className="relative min-h-screen flex items-center px-4 py-20" style={{ backgroundImage: 'url(/backgroundHeroSection.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         <div className="relative z-10 max-w-[1600px] mx-auto w-full">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Left Column */}
@@ -124,11 +124,6 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             >
               <div className="w-full relative flex justify-center">
                 <div className="absolute -inset-20 bg-red-600/20 blur-3xl rounded-full opacity-20"></div>
-                <img
-                  src="/HeroSection.png"
-                  alt="Hero Section Stats"
-                  className="relative w-[200%] max-w-none h-auto object-contain -ml-[50%] translate-x-1 transform hover:scale-105 transition-transform duration-500"
-                />
               </div>
             </div>
           </div>
@@ -136,32 +131,40 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* Why Choose */}
-      <section className="py-20 px-4 border-t border-gray-700">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h2 className="text-6xl lg:text-7xl font-['Unica_One'] text-white mb-2">
-              WHY <span className="text-red-600">BLACK BYT3</span>
-            </h2>
-            <div className="h-px w-32 bg-red-600 mt-4"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WHY_CHOOSE_CARDS.map((card, idx) => (
-              <div
-                key={idx}
-                className="border border-gray-700 p-6 hover:border-red-600 transition-colors"
-              >
-                <div className="text-red-600/40 font-['Unica_One'] text-6xl mb-4">
-                  {String(idx + 1).padStart(2, '0')}
-                </div>
-                <h3 className="text-white font-mono font-bold text-lg mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {card.desc}
-                </p>
+      <section className="py-20 px-4 border-t border-black relative">
+        <div className="absolute inset-0 bg-cover bg-center lg:hidden" style={{ backgroundImage: 'url(/whyblackbyt3.png)' }}></div>
+        <div className="absolute inset-0 bg-black/50 lg:hidden"></div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+            <div className="flex-1">
+              <div className="mb-16">
+                <h2 className="text-6xl lg:text-7xl font-['Unica_One'] text-white mb-2">
+                  WHY <span className="text-red-600">BLACK BYT3</span>
+                </h2>
+                <div className="h-px w-32 bg-red-600 mt-4"></div>
               </div>
-            ))}
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {WHY_CHOOSE_CARDS.map((card, idx) => (
+                  <div
+                    key={idx}
+                    className="border border-black p-6 hover:border-red-600 transition-colors"
+                  >
+                    <div className="text-red-600/40 font-['Unica_One'] text-6xl mb-4">
+                      {String(idx + 1).padStart(2, '0')}
+                    </div>
+                    <h3 className="text-white font-mono font-bold text-lg mb-3">
+                      {card.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      {card.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="hidden lg:block w-96 flex-shrink-0">
+              <img src="/whyblackbyt3.png" alt="Why Black Byt3" className="w-full h-full object-cover" />
+            </div>
           </div>
         </div>
       </section>

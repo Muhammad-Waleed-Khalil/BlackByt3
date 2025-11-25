@@ -100,7 +100,7 @@ export const HERO_CONTENT = {
   title: "BLACK BYT3",
   tagline: "Silent. Swift. Secure.",
   subtagline: "Empowering Secure Innovation in the Digital Age",
-  description: "Black Byt3 is a cyber space — a living digital sentinel combining ethical hackers, AI engineers, and practical R&D. We deliver penetration testing, red teaming, threat intelligence, and AI-driven solutions so enterprises, startups, and students can innovate without fear.",
+  description: "Black Byt3 is a cyber space a living digital sentinel combining ethical hackers, AI engineers, and practical R&D. We deliver penetration testing, red teaming, threat intelligence, and AI-driven solutions so enterprises, startups, and students can innovate without fear.",
   ctaPrimary: "Request a Free Security Assessment",
   ctaSecondary: "Explore Courses"
 };
@@ -116,7 +116,7 @@ export const WHY_CHOOSE_CARDS = [
   },
   {
     title: "Educational Outreach",
-    desc: "Academy, OCMP mentorship, FYP support — building future talent."
+    desc: "Academy, OCMP mentorship, FYP support  building future talent."
   },
   {
     title: "Innovation",
@@ -128,7 +128,7 @@ export const ABOUT_CONTENT = {
   headline: "We make the digital world safer.",
   story: "Founded to bridge the gap between academic theory and real-world security, Black Byt3 grew into a Cyber Space: Command Center for operations, Black Labs for R&D, The Academy for learning, and The Arena for community competitions and events.",
   vision: "To lead the future of secure and intelligent technology by delivering cutting-edge cybersecurity and AI solutions, empowering businesses and individuals to innovate fearlessly in the digital age.",
-  mission: "To build a living Cyber Space that unites hackers, developers, researchers, and learners under one secure digital realm — enabling innovation, collaboration, and defense at every level.",
+  mission: "To build a living Cyber Space that unites hackers, developers, researchers, and learners under one secure digital realm  enabling innovation, collaboration, and defense at every level.",
   values: ["Empower Clients", "Innovation", "Support Emerging Talent", "Innovate Relentlessly", "Promote Digital Literacy", "Build a Trusted Cyber Space"]
 };
 
@@ -232,7 +232,7 @@ export const SOLUTIONS_INDUSTRIES = [
 ];
 
 export const ACADEMY_CONTENT = {
-  headline: "Learn by Doing — Practical Cyber & Cloud Skills",
+  headline: "Learn by Doing  Practical Cyber & Cloud Skills",
   offerings: [
     "Course Catalog (Bootcamps)",
     "BCOP & BCAP, & MLCert",

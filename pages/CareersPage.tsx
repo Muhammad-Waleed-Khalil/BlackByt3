@@ -239,7 +239,7 @@ const CareersPage: React.FC = () => {
             Join the Cyber Resistance
           </h1>
           <p className="font-mono text-gray-300 text-lg max-w-3xl">
-            We're always looking for anomalies — skilled hackers, security researchers, and innovative minds who can help us build a more secure digital world. If you fit the description, submit your packet.
+            We're always looking for anomalies skilled hackers, security researchers, and innovative minds who can help us build a more secure digital world. If you fit the description, submit your packet.
           </p>
         </div>
 

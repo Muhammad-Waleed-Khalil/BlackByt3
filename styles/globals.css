@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #000;
+  color: #ff0000;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Unica One', cursive;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050000;
+}
+::-webkit-scrollbar-thumb {
+  background: #330000;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff0000;
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.cursor-crosshair {
+  cursor: crosshair;
+}
+
+/* Hide scrollbar for terminal */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

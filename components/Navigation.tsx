@@ -167,7 +167,7 @@ const Navigation: React.FC = () => {
                 className="transition-opacity hover:opacity-80"
               >
                 <img
-                  src="/Logo.png"
+                  src="/Logo.webp"
                   alt="BLACK BYT3"
                   className="h-14 w-auto"
                 />

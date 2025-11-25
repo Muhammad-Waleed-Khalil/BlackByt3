@@ -22,7 +22,7 @@ const Footer: React.FC = memo(() => {
                     {/* Brand Column */}
                     <div className="lg:col-span-1 space-y-6">
                         <Link to="/" className="block">
-                            <img src="/Logo.png" alt="Black Byt3" className="h-12 w-auto" />
+                            <img src="/Logo.webp" alt="Black Byt3" className="h-12 w-auto" />
                         </Link>
                         <p className="text-gray-400 text-sm font-mono leading-relaxed">
                             The #1 platform to build attack-ready teams and secure digital assets.

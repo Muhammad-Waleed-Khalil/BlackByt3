@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import Lenis from 'lenis';
 import Scene3D from './components/Scene3D';
 import Terminal from './components/Terminal';
 import Navigation from './components/Navigation';
@@ -80,6 +81,20 @@ const AppContent: React.FC = () => {
     damping: 30,
     restDelta: 0.001
   });
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   const handlePlaySfx = (type: 'type' | 'error' | 'success') => {
     if (type === 'type') playTyping();

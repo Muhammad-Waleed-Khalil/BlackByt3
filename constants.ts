@@ -143,9 +143,7 @@ export const TEAM_LIST: TeamMember[] = [
   { name: "Hisbullah", role: "Penetration Tester & Security Analyst", description: "The rising shadow. Specializing in web application vulnerabilities.", clearance: "L2_OPERATOR", specialty: "WEB_SEC" },
   { name: "Aqsa Wadood", role: "Communications & Community Manager", description: "Monitoring the dark web wires. Tracking threat actors and TTPs.", clearance: "L3_INTEL", specialty: "INTEL" },
   { name: "Sanan Ali Shah", role: "Public Relations Manager", description: "Builder of secure pipelines. Automating defense mechanisms.", clearance: "L2_ENGINEER", specialty: "DEVSECOPS" },
-  { name: "Maham Arshad", role: "Creative Lead", description: "Navigating the labyrinth of compliance. Ensuring security meets policy.", clearance: "L3_COMPLIANCE", specialty: "POLICY" },
-  { name: "Muhammad Saad", role: "DevOps Engineer", description: "Infrastructure automation expert ensuring seamless deployment and scalability.", clearance: "L3_DEVOPS", specialty: "INFRASTRUCTURE" },
-  { name: "Abdul Samad", role: "Marketing Manager", description: "Brand strategist driving Black Byt3's market presence and growth.", clearance: "L1_MARKETING", specialty: "MARKETING" }
+ 
 ];
 
 export const CTF_LIST: TeamMember[] = [

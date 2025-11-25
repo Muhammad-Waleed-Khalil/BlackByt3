@@ -4,12 +4,7 @@ import { Users, Handshake, Globe } from 'lucide-react';
 
 const PartnershipsPage: React.FC = () => {
   const strategicPartners = [
-    {
-      name: "Rayonix",
-      description: "Strategic technology partner specializing in enterprise security solutions.",
-      type: "Strategic Alliance",
-      status: "Active"
-    },
+   
     {
       name: "TechBiz",
       description: "Regional business development and market expansion partner.",

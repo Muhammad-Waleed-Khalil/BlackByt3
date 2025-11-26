@@ -351,7 +351,7 @@ const CertificateValidation: React.FC = React.memo(() => {
 
   return (
     <div className="mb-16">
-      <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+      <h3 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">
         Certificate Validation
       </h3>
 

@@ -11,21 +11,21 @@ import ScrollToTop from './components/ScrollToTop';
 import { ModalType } from './types';
 
 // Page Components
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import SolutionsPage from './pages/SolutionsPage';
-import AcademyPage from './pages/AcademyPage';
-import ArenaPage from './pages/ArenaPage';
-import ProjectsPage from './pages/ProjectsPage';
-import ResourcesPage from './pages/ResourcesPage';
-import ShopPage from './pages/ShopPage';
-import FAQPage from './pages/FAQPage';
-import ContactPage from './pages/ContactPage';
-import PartnershipsPage from './pages/PartnershipsPage';
-import CareersPage from './pages/CareersPage';
-import SupportPortalPage from './pages/SupportPortalPage';
-import LegalPage from './pages/LegalPage';
+import HomePage from './components/HomePage';
+import AboutPage from './components/AboutPage';
+import ServicesPage from './components/ServicesPage';
+import SolutionsPage from './components/SolutionsPage';
+import AcademyPage from './components/AcademyPage';
+import ArenaPage from './components/ArenaPage';
+import ProjectsPage from './components/ProjectsPage';
+import ResourcesPage from './components/ResourcesPage';
+import ShopPage from './components/ShopPage';
+import FAQPage from './components/FAQPage';
+import ContactPage from './components/ContactPage';
+import PartnershipsPage from './components/PartnershipsPage';
+import CareersPage from './components/CareersPage';
+import SupportPortalPage from './components/SupportPortalPage';
+import LegalPage from './components/LegalPage';
 
 // Inner component that uses navigation
 const AppContent: React.FC = () => {

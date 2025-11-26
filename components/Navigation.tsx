@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, Briefcase, Target, Building } from 'lucide-react';
 import { MEGA_MENU_CATEGORIES } from '../constants';
 
@@ -120,11 +120,10 @@ const Navigation: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [activeDropdown]);
 
-  const handleNavigation = (path: string) => {
+  const handleLinkClick = () => {
     // Close the menu immediately when navigation happens
     setActiveDropdown(null);
-    navigate(`/${path}`);
-    debugLog(`Navigated to ${path}`);
+    setIsMobileMenuOpen(false);
   };
 
   const handleDropdownToggle = (categoryId: string) => {
@@ -162,16 +161,16 @@ const Navigation: React.FC = () => {
 
             {/* Logo/Brand */}
             <div className="flex-shrink-0">
-              <button
-                onClick={() => handleNavigation('home')}
-                className="transition-opacity hover:opacity-80"
+              <Link
+                to="/"
+                className="transition-opacity hover:opacity-80 block"
               >
                 <img
                   src="/Logo.webp"
                   alt="BLACK BYT3"
                   className="h-14 w-auto"
                 />
-              </button>
+              </Link>
             </div>
 
             {/* Desktop Navigation - Mega Menu - Centered */}
@@ -214,9 +213,10 @@ const Navigation: React.FC = () => {
                                 </h3>
                                 <div className="space-y-2">
                                   {subcategory.items.map((item) => (
-                                    <button
+                                    <Link
                                       key={item.id}
-                                      onClick={() => handleNavigation(item.id)}
+                                      to={`/${item.id}`}
+                                      onClick={handleLinkClick}
                                       className={`block w-full text-left p-3 rounded-lg transition-all duration-200 group ${
                                         isActiveRoute(item.id)
                                           ? 'bg-red-900/30 text-red-400'
@@ -231,7 +231,7 @@ const Navigation: React.FC = () => {
                                           {item.description}
                                         </div>
                                       )}
-                                    </button>
+                                    </Link>
                                   ))}
                                 </div>
                               </div>
@@ -275,9 +275,10 @@ const Navigation: React.FC = () => {
                           {subcategory.title}
                         </div>
                         {subcategory.items.map((item) => (
-                          <button
+                          <Link
                             key={item.id}
-                            onClick={() => handleNavigation(item.id)}
+                            to={`/${item.id}`}
+                            onClick={handleLinkClick}
                             className={`block w-full text-left p-2 text-sm rounded transition-colors ${
                               isActiveRoute(item.id)
                                 ? 'text-red-400 bg-red-900/20'
@@ -285,7 +286,7 @@ const Navigation: React.FC = () => {
                             }`}
                           >
                             {item.label}
-                          </button>
+                          </Link>
                         ))}
                       </div>
                     ))}

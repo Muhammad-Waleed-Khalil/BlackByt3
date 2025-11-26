@@ -96,7 +96,6 @@ const Background = ({ isRedpill }: { isRedpill: boolean }) => {
 
 const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
   const group = useRef<THREE.Group>(null);
-  const [cracked, setCracked] = useState(false);
 
   useFrame((state) => {
     if (group.current) {
@@ -106,11 +105,6 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
       if (!isRedpill) {
          group.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
       }
-
-      const x = state.pointer.x;
-      const y = state.pointer.y;
-      group.current.rotation.y += x * 0.05;
-      group.current.rotation.x += -y * 0.05;
     }
   });
 
@@ -122,11 +116,9 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
     anchorY: 'middle' as const,
   };
 
-  const expansion = cracked ? 0.5 : 0;
-
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      <group ref={group} onClick={() => setCracked(!cracked)}>
+      <group ref={group}>
 
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[1.8, 2.8, 1.8]} />
@@ -137,7 +129,7 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
           />
         </mesh>
 
-        <group position={[0, 0, expansion]}>
+        <group position={[0, 0, 0]}>
            <mesh position={[0, 0, 1]}>
              <boxGeometry args={[2, 3, 0.1]} />
              <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
@@ -146,7 +138,7 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
            <Text position={[0, -0.5, 1.06]} {...textProps}>BYT3</Text>
         </group>
 
-        <group position={[expansion, 0, 0]} rotation={[0, Math.PI/2, 0]}>
+        <group position={[0, 0, 0]} rotation={[0, Math.PI/2, 0]}>
           <mesh position={[0, 0, 1]}>
              <boxGeometry args={[2, 3, 0.1]} />
              <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
@@ -154,7 +146,7 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
           <Text position={[0, 0, 1.06]} {...textProps} fontSize={0.15}>SILENT. SWIFT. SECURE.</Text>
         </group>
 
-        <group position={[0, 0, -expansion]} rotation={[0, Math.PI, 0]}>
+        <group position={[0, 0, 0]} rotation={[0, Math.PI, 0]}>
            <mesh position={[0, 0, 1]}>
              <boxGeometry args={[2, 3, 0.1]} />
              <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
@@ -162,7 +154,7 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
            <Text position={[0, 0, 1.06]} {...textProps} fontSize={0.15}>JOIN THE HIVE</Text>
         </group>
 
-        <group position={[-expansion, 0, 0]} rotation={[0, -Math.PI/2, 0]}>
+        <group position={[0, 0, 0]} rotation={[0, -Math.PI/2, 0]}>
            <mesh position={[0, 0, 1]}>
              <boxGeometry args={[2, 3, 0.1]} />
              <meshStandardMaterial color="#050505" metalness={0.8} roughness={0.2} transparent opacity={0.9} />
@@ -181,8 +173,18 @@ const Monolith = ({ isRedpill }: { isRedpill: boolean }) => {
 
 const Scene3D: React.FC<SceneProps> = memo(({ isRedpill }) => {
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-1000">
-      <Canvas>
+    <div
+      className="fixed inset-0 z-0 transition-all duration-1000"
+      style={{ pointerEvents: 'none' }}
+    >
+      <Canvas
+        style={{ pointerEvents: 'none', touchAction: 'none' }}
+        gl={{
+          alpha: true,
+          antialias: false,
+          powerPreference: 'high-performance'
+        }}
+      >
         <PerspectiveCamera makeDefault position={[0, 0, 6]} />
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} color="#ff0000" intensity={isRedpill ? 5 : 2} />

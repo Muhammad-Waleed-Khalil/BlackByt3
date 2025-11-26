@@ -42,7 +42,7 @@ const PartnershipsPage: React.FC = () => {
 
         {/* Strategic Partners Grid */}
         <div className="mb-16">
-          <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+          <h3 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">
             Strategic Partners
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

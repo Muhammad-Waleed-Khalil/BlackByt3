@@ -109,7 +109,7 @@ const ProjectsPage: React.FC = () => {
 
         {/* Black Labs - Open Source */}
         <div className="mt-20">
-          <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+          <h3 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">
             Black Labs - Open Source Tools
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

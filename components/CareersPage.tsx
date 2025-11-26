@@ -264,7 +264,7 @@ const CareersPage: React.FC = () => {
 
         {/* Current Openings */}
         <div className="mb-16">
-          <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+          <h3 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">
             Active Job Openings
           </h3>
           <div className="space-y-6">

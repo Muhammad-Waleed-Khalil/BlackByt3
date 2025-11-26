@@ -83,7 +83,7 @@ const AcademyPage: React.FC = () => {
 
         {/* Course Catalog */}
         <div className="mb-16">
-          <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+          <h3 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">
             Course Catalog
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -128,7 +128,7 @@ const AcademyPage: React.FC = () => {
 
         {/* Black Hol3 Section */}
         <div className="mb-16">
-          <h3 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">
+          <h3 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">
             Black Hol3
           </h3>
 

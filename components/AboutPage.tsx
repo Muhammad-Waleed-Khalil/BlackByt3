@@ -55,7 +55,7 @@ const AboutPage: React.FC<AboutPageProps> = () => {
 
         {/* Team Grid */}
         <div>
-          <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">Meet Our Team</h4>
+          <h4 className="text-red-500 font-mono uppercase text-xl tracking-widest mb-8 border-b border-red-900/50 pb-2">Meet Our Team</h4>
           <TeamGrid members={TEAM_LIST} />
         </div>
       </div>

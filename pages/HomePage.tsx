@@ -23,6 +23,7 @@ import {
   Activity,
   Code2,
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface HomePageProps {
   onNavigate: (section: string) => void;
@@ -58,12 +59,20 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden bg-black">
-      {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-red-600 origin-left z-50"
-        style={{ scaleX }}
+    <>
+      <SEO
+        title="Black Byt3 - Elite Cybersecurity & Penetration Testing Services in Pakistan"
+        description="Pakistan's premier cybersecurity firm offering penetration testing, red team operations, security audits, AI/ML security, cloud security (AWS/Azure), IoT security, and professional cybersecurity training. ISO certified ethical hackers protecting businesses with world-class offensive security services."
+        keywords="cybersecurity pakistan, penetration testing services pakistan, ethical hacking pakistan, red team operations, security audit pakistan, VAPT services, vulnerability assessment pakistan, cyber security consultancy, cloud security pakistan, AWS security, network security pakistan, web application security testing, mobile app security, IoT security pakistan, hardware hacking, BlackByt3, Black Byt3, penetration tester pakistan, cybersecurity training pakistan, OSCP training, CEH certification pakistan, bug bounty pakistan, CTF pakistan, cybersecurity bootcamp pakistan, information security pakistan, offensive security, defensive security, security researcher pakistan, cyber defense pakistan"
+        url="https://www.blackbyt3.com"
+        image="https://www.blackbyt3.com/Logo.webp"
       />
+      <div className="min-h-screen w-full relative overflow-hidden bg-black">
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-1 bg-red-600 origin-left z-50"
+          style={{ scaleX }}
+        />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center px-4 py-20" style={{ backgroundImage: 'url(/backgroundHeroSection.webp)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
@@ -374,6 +383,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

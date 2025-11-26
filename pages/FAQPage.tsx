@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FAQ_CONTENT, SERVICES_DATA } from '../constants';
 import { HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const FAQPage: React.FC = () => {
   const [openFaq, setOpenFaq] = React.useState<number | null>(null);
@@ -30,8 +31,41 @@ const FAQPage: React.FC = () => {
 
   const allFaqs = [...FAQ_CONTENT, ...additionalFaqs];
 
+  // Add FAQ Schema
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": allFaqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    let script = document.getElementById('faq-schema') as HTMLScriptElement;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'faq-schema';
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(faqSchema);
+  }, [allFaqs]);
+
   return (
-    <div className="min-h-screen py-20 px-6">
+    <>
+      <SEO
+        title="FAQ - Cybersecurity Questions Answered | Black Byt3"
+        description="Frequently asked questions about Black Byt3's cybersecurity services, penetration testing, training programs, pricing, certifications, and methodologies. Get answers from our security experts."
+        keywords="cybersecurity FAQ pakistan, penetration testing questions, ethical hacking FAQ, security audit questions, cybersecurity training FAQ, OSCP FAQ, CEH FAQ, Black Hol3 questions, security consulting FAQ pakistan"
+        url="https://www.blackbyt3.com/faq"
+        image="https://www.blackbyt3.com/Logo.webp"
+      />
+      <div className="min-h-screen py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-16">
           <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
@@ -107,6 +141,7 @@ const FAQPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

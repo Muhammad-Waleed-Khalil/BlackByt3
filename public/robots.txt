@@ -1,0 +1,63 @@
+# BlackByt3 Robots.txt - Optimized for SEO
+# https://www.blackbyt3.com/robots.txt
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /solutions
+Allow: /academy
+Allow: /arena
+Allow: /projects
+Allow: /shop
+Allow: /faq
+Allow: /contact
+Allow: /partnerships
+Allow: /careers
+Allow: /support
+Allow: /legal
+
+# Disallow sensitive areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /private/
+
+# Allow all bots to crawl
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Crawl-delay for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://www.blackbyt3.com/sitemap.xml
+Sitemap: https://blackbyt3.com/sitemap.xml
+
+# Host preference
+Host: https://www.blackbyt3.com

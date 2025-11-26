@@ -46,7 +46,7 @@ export const MEGA_MENU_CATEGORIES = [
       {
         title: 'ACADEMY',
         items: [
-          { id: SectionId.ACADEMY, label: 'Academy', description: 'Courses, Certifications, OCMP' }
+          { id: SectionId.ACADEMY, label: 'Academy', description: 'Courses, Certifications, Black Hol3' }
         ]
       },
       {
@@ -116,7 +116,7 @@ export const WHY_CHOOSE_CARDS = [
   },
   {
     title: "Educational Outreach",
-    desc: "Academy, OCMP mentorship, FYP support  building future talent."
+    desc: "Academy, Black Hol3 mentorship, FYP support  building future talent."
   },
   {
     title: "Innovation",
@@ -133,24 +133,25 @@ export const ABOUT_CONTENT = {
 };
 
 export const TEAM_LIST: TeamMember[] = [
-  { name: "Muhammad Waqar", role: "Founder / CEO", description: "The architect of the Cyber Space. Orchestrating offensive operations and strategic defense.", clearance: "L5_ADMIN", specialty: "ARCHITECT" },
-  { name: "Muhammad Jawad", role: "CTO / Chief Technology Officer", description: "Ensuring swift execution of all tactical engagements. Master of logistics.", clearance: "L4_COMMAND", specialty: "OPS_LEAD" },
-  { name: "Shahmir Khan", role: "Machine Learning Engineer", description: "Breaching secure perimeters before breakfast. Network infrastructure exploitation.", clearance: "L4_OFFENSIVE", specialty: "BREACHER" },
-  { name: "Waleed Khalil", role: "Web Developer", description: "Frontend sorcerer. Backend demon. Deploys code that hacks itself for fun.", clearance: "LΩ_OMNISCIENT", specialty: "REALITY_BENDER" },
-  { name: "Arbab Ammar Hanif", role: "AI Engineer & IoT Expert", description: "Adversary emulation specialist. Simulates APT threats to test organizational resilience.", clearance: "L4_OFFENSIVE", specialty: "RED_TEAM" },
-  { name: "Jafar Ali", role: "Red Teamer & Penetration Tester", description: "Black Labs Director. If it has a circuit board, he can hack it.", clearance: "L4_HARDWARE", specialty: "HARDWARE" },
-  { name: "Muhammad Zeeshan", role: "Penetration Tester & Security Analyst", description: "Securing the ethereal. Specialist in AWS/Azure hardening and container escapes.", clearance: "L3_CLOUD", specialty: "CLOUD_SEC" },
-  { name: "Hisbullah", role: "Penetration Tester & Security Analyst", description: "The rising shadow. Specializing in web application vulnerabilities.", clearance: "L2_OPERATOR", specialty: "WEB_SEC" },
-  { name: "Aqsa Wadood", role: "Communications & Community Manager", description: "Monitoring the dark web wires. Tracking threat actors and TTPs.", clearance: "L3_INTEL", specialty: "INTEL" },
-  { name: "Sanan Ali Shah", role: "Public Relations Manager", description: "Builder of secure pipelines. Automating defense mechanisms.", clearance: "L2_ENGINEER", specialty: "DEVSECOPS" },
- 
+  { name: "Muhammad Waqar", role: "Founder / CEO", description: "The architect of the Cyber Space. Orchestrating offensive operations and strategic defense.", clearance: "L5_ADMIN", specialty: "ARCHITECT", linkedin: "https://linkedin.com/in/muhammad-waqar", github: "https://github.com/muhammad-waqar" },
+  { name: "Muhammad Jawad", role: "CTO / Chief Technology Officer", description: "Ensuring swift execution of all tactical engagements. Master of logistics.", clearance: "L4_COMMAND", specialty: "OPS_LEAD", linkedin: "https://linkedin.com/in/muhammad-jawad", github: "https://github.com/muhammad-jawad" },
+  { name: "Shahmir Khan", role: "Machine Learning Engineer", description: "Breaching secure perimeters before breakfast. Network infrastructure exploitation.", clearance: "L4_OFFENSIVE", specialty: "BREACHER", linkedin: "https://linkedin.com/in/shahmir-khan", github: "https://github.com/shahmir-khan" },
+  { name: "Waleed Khalil", role: "Web Developer", description: "Frontend sorcerer. Backend demon. Deploys code that hacks itself for fun.", clearance: "LΩ_OMNISCIENT", specialty: "REALITY_BENDER", linkedin: "https://linkedin.com/in/waleed-khalil", github: "https://github.com/waleed-khalil" },
+  { name: "Arbab Ammar Hanif", role: "AI Engineer & IoT Expert", description: "Adversary emulation specialist. Simulates APT threats to test organizational resilience.", clearance: "L4_OFFENSIVE", specialty: "RED_TEAM", linkedin: "https://linkedin.com/in/arbab-ammar-hanif", github: "https://github.com/arbab-ammar-hanif" },
+  { name: "Jafar Ali", role: "Red Teamer & Penetration Tester", description: "Black Labs Director. If it has a circuit board, he can hack it.", clearance: "L4_HARDWARE", specialty: "HARDWARE", linkedin: "https://linkedin.com/in/jafar-ali", github: "https://github.com/jafar-ali" },
+  { name: "Muhammad Zeeshan", role: "Penetration Tester & Security Analyst", description: "Securing the ethereal. Specialist in AWS/Azure hardening and container escapes.", clearance: "L3_CLOUD", specialty: "CLOUD_SEC", linkedin: "https://linkedin.com/in/muhammad-zeeshan", github: "https://github.com/muhammad-zeeshan" },
+  { name: "Hisbullah", role: "Penetration Tester & Security Analyst", description: "The rising shadow. Specializing in web application vulnerabilities.", clearance: "L2_OPERATOR", specialty: "WEB_SEC", linkedin: "https://linkedin.com/in/hisbullah", github: "https://github.com/hisbullah" },
+  { name: "Aqsa Wadood", role: "Communications & Community Manager", description: "Monitoring the dark web wires. Tracking threat actors and TTPs.", clearance: "L3_INTEL", specialty: "INTEL", linkedin: "https://linkedin.com/in/aqsa-wadood", github: "https://github.com/aqsa-wadood" },
+  { name: "Sanan Ali Shah", role: "Public Relations Manager", description: "Builder of secure pipelines. Automating defense mechanisms.", clearance: "L2_ENGINEER", specialty: "DEVSECOPS", linkedin: "https://linkedin.com/in/sanan-ali-shah", github: "https://github.com/sanan-ali-shah" },
+
 ];
 
 export const CTF_LIST: TeamMember[] = [
-  { name: "Rayyan Afridi", role: "CTF Player", description: "Elite CTF competitor bringing tactical brilliance to cybersecurity challenges.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT" },
-  { name: "Asees Shah", role: "CTF Player", description: "Versatile cyber warrior excelling in capture the flag competitions.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT" },
-  { name: "Khattak", role: "CTF Player", description: "Strategic CTF specialist turning competition into training grounds.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT" },
-  { name: "Samia", role: "CTF Player", description: "Rising CTF star demonstrating exceptional cybersecurity prowess.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT" }
+  { name: "Mian Hisbullah", role: "CTF Captain", description: "Leading the charge with strategic brilliance and tactical mastery in cybersecurity competitions.", clearance: "L3_CTF_LEAD", specialty: "CTF_CAPTAIN", linkedin: "https://linkedin.com/in/mian-hisbullah" },
+  { name: "Raza Ellahi", role: "CTF Player", description: "Elite CTF competitor with exceptional problem-solving skills and technical expertise.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT", linkedin: "https://linkedin.com/in/raza-ellahi" },
+  { name: "Asees Shah", role: "CTF Player", description: "Versatile cyber warrior excelling in capture the flag competitions.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT", linkedin: "https://linkedin.com/in/asees-shah" },
+  { name: "Samia Sultan", role: "CTF Player", description: "Rising CTF star demonstrating exceptional cybersecurity prowess and dedication.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT", linkedin: "https://linkedin.com/in/samia-sultan" },
+  { name: "Asfandyar Javid", role: "CTF Player", description: "Skilled cybersecurity specialist bringing innovative approaches to CTF challenges.", clearance: "L2_CTF", specialty: "CTF_CONTESTANT", linkedin: "https://linkedin.com/in/asfandyar-javid" }
 ];
 
 export const SERVICES_DATA: ServiceItem[] = [
@@ -215,9 +216,9 @@ export const SERVICES_DATA: ServiceItem[] = [
     icon: "book"
   },
   {
-    title: "OCMP (Cyber Mentor)",
+    title: "Black Hol3 (Cyber Mentor)",
     category: "Education",
-    description: "One-to-One Cyber Mentor Program.",
+    description: "Personalized mentorship with hands-on training, project guidance, and career planning sessions.",
     details: ["Cyber Security Mastery", "BlackByt3 Practical AWS Certified", "Machine Learning Certificate - A Hacker Way"],
     icon: "user"
   }
@@ -236,7 +237,7 @@ export const ACADEMY_CONTENT = {
   offerings: [
     "Course Catalog (Bootcamps)",
     "BCOP & BCAP, & MLCert",
-    "OCMP (1:1 Mentorship)",
+    "Black Hol3 (1:1 Mentorship)",
     "BCOP - Black Byt3 Certified Offensive Practitioner",
     "BCAP - Black Byt3 Certified AWS Practitioner",
     "MLCert - The Hacker's Approach to Machine Learning"
@@ -299,7 +300,7 @@ export const PARTNERSHIPS_CONTENT = {
 };
 
 export const FAQ_CONTENT: FaqItem[] = [
-  { question: "What is OCMP?", answer: "One-to-One Cyber Mentor Program. Personalized roadmap, live labs, and career guidance." },
+  { question: "What is Black Hol3?", answer: "Black Hol3: Personalized mentorship with hands-on training, project guidance, and career planning sessions." },
   { question: "Do you offer student discounts?", answer: "Yes. Verify your academic status via the contact form for special FYP rates." },
   { question: "Is Black Labs hardware legal?", answer: "All tools are sold for educational and research purposes only. Ethics agreement required." }
 ];

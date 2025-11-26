@@ -115,6 +115,20 @@ const ProjectsPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
+                name: "SubEnum Tool",
+                description: "Subdomain enumeration and reconnaissance tool for security assessments",
+                status: "Active",
+                downloads: "1.5K",
+                github: "https://github.com/MushaibAhmed/subenum-tool"
+              },
+              {
+                name: "ChromePass Harvester",
+                description: "Chrome password extraction and security testing utility",
+                status: "Active",
+                downloads: "980",
+                github: "https://github.com/HusnainZargar/ChromePass-Harvester"
+              },
+              {
                 name: "WiFi-Pentesting-Toolkit",
                 description: "Comprehensive WiFi security assessment toolkit",
                 status: "Active",
@@ -133,19 +147,29 @@ const ProjectsPage: React.FC = () => {
                 downloads: "650"
               }
             ].map((tool, idx) => (
-              <div key={idx} className="bg-black/60 border border-gray-700 p-6 hover:border-red-600 transition-colors">
+              <div key={idx} className="bg-black/60 border border-gray-700 p-6 hover:border-red-600 transition-colors group">
                 <h4 className="text-white font-['Unica_One'] text-lg mb-2">{tool.name}</h4>
                 <p className="text-gray-300 font-mono text-sm mb-4">{tool.description}</p>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mb-3">
                   <span className={`text-xs font-mono border px-2 py-1 uppercase ${
-                    tool.status === 'Active' 
-                      ? 'border-green-600 text-green-500' 
+                    tool.status === 'Active'
+                      ? 'border-green-600 text-green-500'
                       : 'border-yellow-600 text-yellow-500'
                   }`}>
                     {tool.status}
                   </span>
                   <span className="text-gray-400 font-mono text-xs">{tool.downloads} downloads</span>
                 </div>
+                {(tool as any).github && (
+                  <a
+                    href={(tool as any).github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-red-600/10 border border-red-600 text-red-500 font-mono py-2 text-center hover:bg-red-600 hover:text-black transition-colors uppercase text-xs tracking-widest"
+                  >
+                    View on GitHub
+                  </a>
+                )}
               </div>
             ))}
           </div>

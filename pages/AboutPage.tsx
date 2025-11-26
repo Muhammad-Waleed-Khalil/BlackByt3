@@ -1,7 +1,8 @@
 import React from 'react';
-import { ABOUT_CONTENT, TEAM_LIST, CTF_LIST } from '../constants';
+import { ABOUT_CONTENT, TEAM_LIST } from '../constants';
 import TeamGrid from '../components/TeamGrid';
 import { Target } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface AboutPageProps {
   // No props needed for now
@@ -9,7 +10,15 @@ interface AboutPageProps {
 
 const AboutPage: React.FC<AboutPageProps> = () => {
   return (
-    <div className="min-h-screen py-20 px-6">
+    <>
+      <SEO
+        title="About Black Byt3 - Leading Cybersecurity Firm in Pakistan | Our Team & Mission"
+        description="Learn about Black Byt3, Pakistan's premier cybersecurity firm. Founded by expert ethical hackers and security researchers. Our mission: protecting businesses through penetration testing, red team operations, and security training. Meet our certified team of OSCP, CEH professionals."
+        keywords="about black byt3, cybersecurity company pakistan, penetration testing company, ethical hacking firm pakistan, security consultancy pakistan, cybersecurity experts pakistan, OSCP certified team, CEH certified hackers, security research pakistan, cyber defense team, offensive security team pakistan, cybersecurity mission, security company pakistan, about blackbyt3"
+        url="https://www.blackbyt3.com/about"
+        image="https://www.blackbyt3.com/Logo.webp"
+      />
+      <div className="min-h-screen py-20 px-6">
       <div className="max-w-6xl mx-auto space-y-16">
         <div>
           <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
@@ -46,17 +55,12 @@ const AboutPage: React.FC<AboutPageProps> = () => {
 
         {/* Team Grid */}
         <div>
-          <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">Active Operators</h4>
+          <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">Meet Our Team</h4>
           <TeamGrid members={TEAM_LIST} />
-        </div>
-
-        {/* CTF Grid */}
-        <div>
-          <h4 className="text-red-500 font-mono uppercase text-xs tracking-widest mb-8 border-b border-red-900/50 pb-2">CTF Players</h4>
-          <TeamGrid members={CTF_LIST} />
         </div>
       </div>
     </div>
+    </>
   );
 };
 

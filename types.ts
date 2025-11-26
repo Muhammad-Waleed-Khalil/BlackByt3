@@ -51,6 +51,8 @@ export interface TeamMember {
   image?: string;
   clearance: string;
   specialty: string;
+  linkedin?: string;
+  github?: string;
 }
 
 export interface BlogPost {

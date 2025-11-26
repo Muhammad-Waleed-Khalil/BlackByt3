@@ -1,6 +1,7 @@
 import React from 'react';
 import { SERVICES_DATA } from '../constants';
 import DetailedService from '../components/DetailedService';
+import SEO from '../components/SEO';
 
 interface ServicesPageProps {
   // No props needed for now
@@ -8,7 +9,15 @@ interface ServicesPageProps {
 
 const ServicesPage: React.FC<ServicesPageProps> = () => {
   return (
-    <div className="min-h-screen py-20 px-6">
+    <>
+      <SEO
+        title="Cybersecurity Services Pakistan - Penetration Testing, Red Team, Security Audits | Black Byt3"
+        description="Professional cybersecurity services in Pakistan: Penetration Testing (VAPT), Red Team Operations, Security Audits, Threat Intelligence, Incident Response, Cloud Security (AWS/Azure), IoT Security, AI/ML Security Solutions, and Managed Security Services. ISO certified experts."
+        keywords="penetration testing services pakistan, VAPT services pakistan, red team operations pakistan, cybersecurity audit pakistan, security assessment pakistan, vulnerability assessment pakistan, cloud security pakistan, AWS security testing, Azure security audit, web application penetration testing, mobile app security testing, network security assessment, IoT security testing pakistan, API security testing, security consulting pakistan, ethical hacking services, managed security services pakistan, SOC services pakistan, threat intelligence pakistan, incident response pakistan"
+        url="https://www.blackbyt3.com/services"
+        image="https://www.blackbyt3.com/Logo.webp"
+      />
+      <div className="min-h-screen py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-16">
           <h2 className="text-red-600 font-mono text-sm tracking-[0.3em] mb-4 animate-pulse uppercase">
@@ -60,6 +69,7 @@ const ServicesPage: React.FC<ServicesPageProps> = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TeamMember } from '../types';
-import { User, ShieldCheck, Terminal, Cpu } from 'lucide-react';
+import { User, ShieldCheck, Terminal, Cpu, Linkedin, Github } from 'lucide-react';
 
 interface TeamGridProps {
   members: TeamMember[];
@@ -37,6 +37,20 @@ const TeamGrid: React.FC<TeamGridProps> = ({ members }) => {
                 <p className="text-gray-400 text-xs font-mono leading-relaxed pt-2 border-t border-red-900/30">
                   {member.description}
                 </p>
+                {(member.linkedin || member.github) && (
+                  <div className="flex gap-2 mt-2">
+                    {member.linkedin && (
+                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-500 transition-colors">
+                        <Linkedin className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.github && (
+                      <a href={member.github} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-500 transition-colors">
+                        <Github className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+                )}
              </div>
              
              <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-100 transition-opacity">

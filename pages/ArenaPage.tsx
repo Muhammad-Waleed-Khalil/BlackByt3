@@ -23,12 +23,11 @@ const ArenaPage: React.FC = () => {
   ];
 
   const teamMembers = [
-    "Muhammad Waqar (Team Lead)",
-    "Shamir Khan (Web Exploitation)",
-    "Ammar Hanif (Red Team)",
-    "Saad Khan (AI/ML)",
-    "Jafar Ali (Hardware)",
-    "Hisbullah (Forensics)"
+    "Mian Hisbullah (Captain)",
+    "Raza Ellahi",
+    "Asees Shah",
+    "Samia Sultan",
+    "Asfandyar Javid"
   ];
 
   return (

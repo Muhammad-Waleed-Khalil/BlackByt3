@@ -5,6 +5,7 @@ export enum SectionId {
   ABOUT = 'about',
   SERVICES = 'services',
   SOLUTIONS = 'solutions',
+  BOOTCAMP = 'bootcamp',
   ACADEMY = 'academy',
   ARENA = 'arena',
   PROJECTS = 'projects',

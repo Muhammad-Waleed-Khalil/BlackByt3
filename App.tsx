@@ -26,6 +26,7 @@ import PartnershipsPage from './components/PartnershipsPage';
 import CareersPage from './components/CareersPage';
 import SupportPortalPage from './components/SupportPortalPage';
 import LegalPage from './components/LegalPage';
+import BootcampPage from './components/BootcampPage';
 
 // Inner component that uses navigation
 const AppContent: React.FC = () => {
@@ -95,6 +96,7 @@ const AppContent: React.FC = () => {
           <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
           <Route path="/solutions" element={<PageTransition><SolutionsPage /></PageTransition>} />
           <Route path="/academy" element={<PageTransition><AcademyPage /></PageTransition>} />
+          <Route path="/bootcamp" element={<PageTransition><BootcampPage /></PageTransition>} />
           <Route path="/arena" element={<PageTransition><ArenaPage /></PageTransition>} />
           <Route path="/projects" element={<PageTransition><ProjectsPage /></PageTransition>} />
           <Route path="/resources" element={<PageTransition><ResourcesPage /></PageTransition>} />

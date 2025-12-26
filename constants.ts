@@ -74,6 +74,12 @@ export const MEGA_MENU_CATEGORIES = [
           { id: SectionId.ARENA, label: 'Arena', description: 'Events, CTFs, Competitions' },
           { id: SectionId.SHOP, label: 'Shop', description: 'Training sessions, Merchandise' }
         ]
+      },
+      {
+        title: 'ACADEMY',
+        items: [
+          { id: SectionId.BOOTCAMP, label: 'Bootcamp', description: 'January Bootcamps 2026' }
+        ]
       }
     ]
   }
